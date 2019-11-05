@@ -22,7 +22,7 @@ const otherConfig = {
   accessTokenExpiringNotificationTime: 10,
   filterProtocolClaims: true,
   loadUserInfo: true,
-  prompt: true
+  prompt: "login",
 };
 
 export {
