@@ -2,8 +2,11 @@
   <div class="accountcard border-2 w-1/2 border-solid border-gray-400 px-5 py-6 bg-white rounded-sm">
     <div class="accountcard__header relative h-auto">
       <h2 class="text-xl font-bold">테스트</h2>
-      <a @click.prevent="isClickHelpLink = !isClickHelpLink" class="absolute top-0 right-0 p-1 cursor-pointer">
+      <a v-if="!isClickHelpLink" @click.prevent="isClickHelpLink = !isClickHelpLink" class="absolute top-0 right-0 p-1 cursor-pointer">
         <img src="../assets/img/cheveron-outline-down.svg" alt="can't show image" class="w-4 h-4 inline-block">
+      </a>
+      <a v-if="isClickHelpLink" @click.prevent="isClickHelpLink = false" class="absolute top-0 right-0 p-1 cursor-pointer">
+        <img src="../assets/img/cheveron-outline-up.svg" alt="can't show image" class="w-4 h-4 inline-block">
       </a>
       <p v-if="isClickHelpLink"><em>NiShopping</em> description about this card</p>
     </div>
