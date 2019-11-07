@@ -4,9 +4,7 @@ import Main from '../views/MainView.vue';
 import SettingView from '../views/SettingView.vue';
 import UserInfoView from '../views/user/InfoView.vue';
 import UserCartView from '../views/user/CartView.vue';
-
 import AuthService from '../service/AuthService';
-
 
 Vue.use(VueRouter);
 
@@ -24,7 +22,7 @@ const routes = [
     name: 'Setting',
     component: SettingView,
     meta: {
-      requireAuth: ture,
+      requireAuth: true,
     },
   },
   {
