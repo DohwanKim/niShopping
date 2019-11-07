@@ -1,19 +1,27 @@
 <template>
-  <div id="nav">
+  <div id="nav" class="relative min-w-md">
     <nav class="flex items-center justify-between flex-wrap bg-appleBlack p-3">
-      <div class="flex items-center flex-shrink-0 text-white mr-6 pr-6">
+      <div id="logo" class="flex items-center flex-shrink-0 text-white mr-6 pr-6">
         <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
         <span class="font-semibold text-xl tracking-tight">NiShopping</span>
       </div>
       <div class="block flex-grow flex items-center w-auto">
+
+        <button v-if="!isClickSearch" @click.prevent="isClickSearch = true" class="fixed inset-0 h-full w-full cursor-default"></button>
+        <div id="searchfield" v-if="!isClickSearch" class="absolute w-3/5">
+          <div class="container mx-auto py-4 rounded">
+            <input type="search" placeholder="Search..." autofocus="autofocus" class="w-full bg-appleBlack text-white placeholder-white transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl">
+          </div>
+        </div>
+
         <div class="text-sm flex-grow">
-          <a href="#responsive-header" class="px-6 inline-block mt-0 text-white hover:text-white mr-4">
+          <a href="#responsive-header" v-if="isClickSearch" class="px-6 inline-block mt-0 text-white hover:text-white mr-4">
             메뉴1
           </a>
-          <a href="#responsive-header" class="px-6 inline-block mt-0 text-white hover:text-white mr-4">
+          <a href="#responsive-header" v-if="isClickSearch" class="px-6 inline-block mt-0 text-white hover:text-white mr-4">
             메뉴2
           </a>
-          <a href="#responsive-header" class="px-6 inline-block mt-0 text-white hover:text-white">
+          <a href="#responsive-header" v-if="isClickSearch" class="px-6 inline-block mt-0 text-white hover:text-white">
             고객 센터
           </a>
           <div id="search-toggle" class="search-icon cursor-pointer px-6 inline-block" @click.prevent="isClickSearch = !isClickSearch">
@@ -27,31 +35,26 @@
         <!--        </div>-->
       </div>
       <DropDown />
-      <div class="absolute w-full bg-white shadow-xl" :class="{ hidden : isClickSearch }" id="search-content">
-        <div class="container mx-auto py-4 text-black">
-          <input id="searchfield" type="search" placeholder="Search..." autofocus="autofocus" class="w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl">
-        </div>
-      </div>
     </nav>
   </div>
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import DropDown from './DropDown.vue'
+import { Component, Vue } from 'vue-property-decorator';
+import DropDown from './DropDown.vue';
 
-  @Component({
-    components: {
-      DropDown,
-    },
-  })
-  export default class NavBar extends Vue {
-    isClickSearch:boolean= false
-  }
+@Component({
+  components: {
+    DropDown,
+  },
+})
+export default class NavBar extends Vue {
+  isClickSearch:boolean= true
+}
 </script>
 
 <style>
-  #nav {
+  .nav {
     min-width: 768px;
   }
 
