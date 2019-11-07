@@ -51,20 +51,20 @@
 </template>
 
 <script lang="ts">
-  import {
-    Component,
-    Vue,
-  } from 'vue-property-decorator';
-  import NavBar from '../../components/NavBar.vue';
+import {
+  Component,
+  Vue,
+} from 'vue-property-decorator';
+import NavBar from '../../components/NavBar.vue';
 
-  @Component({
-    components: {
-      NavBar,
-    }
-  })
-  export default class InfoView extends Vue {
+@Component({
+  components: {
+    NavBar,
+  },
+})
+export default class InfoView extends Vue {
 
-  }
+}
 </script>
 
 <style scoped>
@@ -76,7 +76,7 @@
   min-width: 768px;
   max-width: 1024px;
   width: 100%
-} 
+}
 .main__title {
   min-width: 100%;
   height: 178px;
