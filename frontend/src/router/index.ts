@@ -61,9 +61,14 @@ const router = new VueRouter({
 const authService = new AuthService();
 router.beforeEach(async (to, _, next) => {
   let user = await authService.getUser();
+  console.log(user)
   if (to.path === '/callback') {
     await authService.siginCallback();
     next('/');
+  }
+  if (to.path === '/logout') {
+    alert('success logout')
+    next('/')
   }
   if (to.meta.requireAuth && user == null) {
     await authService.signIn();
