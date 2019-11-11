@@ -1,17 +1,17 @@
-import { UserManager, WebStorageStateStore } from 'oidc-client';
+import Oidc from 'oidc-client';
 import {
   authConfig,
   clientConfig,
   clientUrl,
-  otherConfig
+  otherConfig,
 } from '../config/authConfig';
 
-var uManager = new UserManager({
-  userStore: new WebStorageStateStore(),
+var uManager = new Oidc.UserManager({
+  userStore: new Oidc.WebStorageStateStore(),
   ...authConfig,
   ...clientConfig,
   ...clientUrl,
-  ...otherConfig
+  ...otherConfig,
 });
 
 uManager.events.addUserLoaded(function (user) {  
@@ -48,9 +48,6 @@ uManager.events.addUserSignedOut(function () {
 });
 
 class AuthService {
-  signIn() {
-    return uManager.signinRedirect();
-  }
 
   getUser() {
     return uManager.getUser();
@@ -60,24 +57,18 @@ class AuthService {
     return uManager.signinSilent();
   }
 
-  async signOut () {    
-    return await uManager.signoutPopup().then(function (resp) {
-      console.log('signed out', resp);
-    }).catch(function (err) {
-      console.log(err)
-    }) 
+  signIn() {
+    return uManager.signinRedirect();
   }
 
-  async siginCallback() {
-    return await uManager.signinCallback()
-      .then(user=>{ console.log("success", user) })
-      .catch((err)=>{ alert("something error",err) })
+  siginCallback() {
+    return uManager.signinCallback();
   }
 
-  async signOutCallback() {
-    return await uManager.signoutRedirectCallback()
-      .then(user=>{ console.log("success", user) })
-      .catch((err)=>{ alert("something error",err )})
+  async signOut () {
+    const redirectUrl = '/logout'
+    await uManager.signoutRedirectCallback();
+    await uManager.removeUser().then(_=>{document.location.href = redirectUrl});
   }
 }
 

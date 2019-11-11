@@ -8,23 +8,21 @@ const authConfig = {
 };
 
 const clientConfig = {
-  scope: 'profile email openid',
+  scope: 'profile email openid offline_access',
 };
 
 const clientUrl = {
   redirect_uri: `${clientDomain}/callback`,
-  post_logout_redirect_uri: `${clientDomain}/logout`,
   silent_redirect_uri: `${clientDomain}/silent-renew`,
 };
 
 const otherConfig = {
   response_type: 'code',
-  accessTokenExpiringNotificationTime: 10,
   filterProtocolClaims: true,
   loadUserInfo: true,
   prompt: "login",
 };
 
 export {
-  authConfig, clientConfig, clientUrl, otherConfig
+  authConfig, clientConfig, clientUrl, otherConfig,
 };

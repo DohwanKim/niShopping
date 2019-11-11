@@ -5,24 +5,37 @@
     </button>
     <button v-if="isClickMenu" @click.prevent="isClickMenu = false" class="fixed top-0 right-0 bottom-0 left-0 h-full w-full bg-black opacity-50 cursor-default"></button>
     <div v-if="isClickMenu" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
-      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">로그인</a>
-      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">계정</a>
-      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">장바구니</a>
+      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click.prevent="signIn">로그인</div>
+      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">계정</div>
+      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">장바구니</div>
+      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click.prevent="signOut">로그아웃</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+  import AuthService from '../service/AuthService';
   import {
     Vue,
     Prop,
-    Component
+    Component,
+
   } from 'vue-property-decorator';
 
   @Component
   export default class DropDown extends Vue {
-    isClickMenu:boolean= false
+    isClickMenu:boolean = false
+    authService = new AuthService();
+
+    signIn(){
+      this.authService.signIn();
+    }
+
+    signOut(){
+      this.authService.signOut();
+    }
   }
+  
 </script>
 
 <style>
