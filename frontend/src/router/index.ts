@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Main from '../views/MainView.vue';
-import SettingView from '../views/SettingView.vue';
+import MyInfoView from '../views/MyInfoView.vue';
 import UserInfoView from '../views/user/InfoView.vue';
 import UserCartView from '../views/user/CartView.vue';
 import UserLikeView from '../views/user/LikeView.vue';
+import UserOrderView from '../views/user/OrderView.vue';
+import UserOrderDetailView from '../views/user/OrderDetailView.vue';
 import AuthService from '../service/AuthService';
 
 Vue.use(VueRouter);
@@ -19,15 +21,15 @@ const routes = [
     },
   },
   {
-    path: '/setting',
-    name: 'Setting',
-    component: SettingView,
+    path: '/myinfo',
+    name: 'MyInfo',
+    component: MyInfoView,
     meta: {
       requireAuth: true,
     },
   },
   {
-    path: '/setting/info',
+    path: '/myinfo/info',
     name: 'UserInfoView',
     component: UserInfoView,
     meta: {
@@ -35,7 +37,7 @@ const routes = [
     },
   },
   {
-    path: '/setting/cart',
+    path: '/myinfo/cart',
     name: 'UserCartView',
     component: UserCartView,
     meta: {
@@ -43,9 +45,25 @@ const routes = [
     },
   },
   {
-    path: '/setting/like',
+    path: '/myinfo/like',
     name: 'UserLikeView',
     component: UserLikeView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/myinfo/order',
+    name: 'UserOrderView',
+    component: UserOrderView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/myinfo/order/detail',
+    name: 'UserOrderDetailView',
+    component: UserOrderDetailView,
     meta: {
       requireAuth: true,
     },
