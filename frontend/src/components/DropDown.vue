@@ -1,10 +1,10 @@
 <template>
-  <div class="relative">
+  <div class="relative" @mouseleave.prevent="isClickMenu = false">
+    <div v-if="isClickMenu" class="absolute h-10 w-10 top-0 left-0"></div>
     <button class="flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white" @click.prevent="isClickMenu = !isClickMenu">
       <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
     </button>
-    <button v-if="isClickMenu" @click.prevent="isClickMenu = false" class="fixed top-0 right-0 bottom-0 left-0 h-full w-full bg-black opacity-50 cursor-default"></button>
-    <div v-if="isClickMenu" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+    <div v-if="isClickMenu" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl" @mouseleave.prevent="isClickMenu = false">
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click.prevent="signIn">로그인</div>
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">계정</div>
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">장바구니</div>
