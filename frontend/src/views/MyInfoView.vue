@@ -1,11 +1,10 @@
 <template>
-  <div id="userMenuView">
+  <div id="myInfoView">
     <div class="nav">
       <NavBar />
     </div>
     <div class="main">
       <div class="main__grid">
-
         <section class="flex main__title content-center rounded shadow-md">
           <div class="main_title--grid flex content-center flex-wrap">
             <div class="w-full p-2">
@@ -55,7 +54,6 @@
             </div>
           </div>
         </section>
-
       </div>
     </div>
     <div class="footer">
@@ -76,7 +74,7 @@ import NavBar from '../components/NavBar.vue';
     NavBar,
   },
 })
-export default class InfoView extends Vue {
+export default class MyInfoView extends Vue {
 
 }
 </script>
