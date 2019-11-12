@@ -1,0 +1,15 @@
+server:
+  port: 9000
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3310/iv_shopping?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: ivis
+    password: ivis_password
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-init-sql: "SET SESSION time_zone = 'Asia/Seoul'"
+  flyway:
+    enabled: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

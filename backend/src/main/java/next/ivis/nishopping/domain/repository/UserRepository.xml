@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="next.ivis.nishopping.domain.repository.UserRepository">
+  <resultMap id="entity" type="next.ivis.nishopping.domain.entity.User" autoMapping="true">
+    <id property="id" column="id"/>
+  </resultMap>
+
+  <sql id="selectColumns">
+    id,
+    user_id,
+    name,
+    nick_name,
+    user_image,
+    gender,
+    address,
+    birth_date,
+    phone_number,
+    phone_number_verif,
+    email,
+    email_verify,
+    register_date,
+    last_logged_in_at
+  </sql>
+  <sql id="updateColumns">
+    `id` = #{id},
+    `user_id` = #{userId},
+    `name` = #{name},
+    `nick_name` = #{nickNmae},
+    `user_image` = #{userImage},
+    `gender` = #{gender},
+    `address` = #{address},
+    `birth_date` = #{birthDate},
+    `phone_number` = #{phoneNumber},
+    `phone_number_verified` = #{phoneNumberVerified},
+    `email` = #{email},
+    `email_verify` = #{emailVerify},
+    `register_date` = #{registerDate},
+    `last_logged_in_at` = #{lastLoggedInAt}
+  </sql>
+
+  <insert id="create" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+    INSERT INTO `user`
+    SET <include refid="updateColumns" />
+  </insert>
+
+  <select id="find" resultMap="entity">
+    SELECT <include refid="selectColumns" />
+    FROM `user`
+    WHERE `user_id` = #{userId}
+  </select>
+
+  <update id="updateUserInfo">
+    UPDATE `user`
+    SET <include refid="updateColumns" />
+    WHERE user_id = #{userId}
+  </update>
+
+  <update id="updateLastLoggedIn">
+    UPDATE `user`
+    SET `last_logged_in` = #{lastLoggedIn}
+    WHERE user_id = #{userId}
+  </update>
+
+</mapper>
