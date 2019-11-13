@@ -16,7 +16,7 @@
     address,
     birth_date,
     phone_number,
-    phone_number_verif,
+    phone_number_verified,
     email,
     email_verify,
     register_date,
@@ -45,13 +45,9 @@
   </insert>
 
   <select id="find" resultMap="entity">
-    SELECT <include refid="selectColumns" />
+    SELECT *
     FROM `user`
     WHERE `user_id` = #{userId}
-  </select>
-
-  <select id="test">
-    SELECT NOW()
   </select>
 
   <update id="updateUserInfo">

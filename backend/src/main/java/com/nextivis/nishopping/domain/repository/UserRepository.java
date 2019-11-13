@@ -9,7 +9,6 @@ import java.time.*;
 public interface UserRepository {
     int create(User user);
     User find(String userId);
-    User updateUserInfo(User user);
-    int updateLastLoggedIn(LocalDateTime lastLoggedIn);
-    LocalDate test();
+    int updateUserInfo(User user);
+    int updateLastLoggedIn(String userId, LocalDateTime lastLoggedIn);
 }

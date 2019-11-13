@@ -1,14 +1,14 @@
 package com.nextivis.nishopping.domain.entity;
 
-import com.nextivis.nishopping.domain.*;
+import com.nextivis.nishopping.domain.CodeEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class User {
     private Long id;
@@ -19,7 +19,7 @@ public class User {
     private String nickName;
     private String userImage;
     @NonNull
-    private int gender;
+    private GenderType gender;
     @NonNull
     private String address;
     @NonNull
