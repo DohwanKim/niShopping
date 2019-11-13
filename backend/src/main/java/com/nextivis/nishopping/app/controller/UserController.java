@@ -1,4 +1,4 @@
-package next.ivis.nishopping.app.controller;
+package com.nextivis.nishopping.app.controller;
 
 import org.springframework.stereotype.*;
 

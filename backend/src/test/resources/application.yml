@@ -6,8 +6,6 @@ spring:
     username: ivis
     password: ivis_password
     driver-class-name: com.mysql.jdbc.Driver
-    hikari:
-      connection-init-sql: "SET SESSION time_zone = 'Asia/Seoul'"
   flyway:
     enabled: true
 mybatis:

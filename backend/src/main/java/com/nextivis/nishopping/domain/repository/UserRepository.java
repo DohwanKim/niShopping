@@ -1,6 +1,6 @@
-package next.ivis.nishopping.domain.repository;
+package com.nextivis.nishopping.domain.repository;
 
-import next.ivis.nishopping.domain.entity.*;
+import com.nextivis.nishopping.domain.entity.*;
 import org.apache.ibatis.annotations.*;
 
 import java.time.*;
@@ -11,4 +11,5 @@ public interface UserRepository {
     User find(String userId);
     User updateUserInfo(User user);
     int updateLastLoggedIn(LocalDateTime lastLoggedIn);
+    LocalDate test();
 }
