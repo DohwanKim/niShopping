@@ -1,5 +1,9 @@
 module.exports = {
   theme: {
+    inset: {
+      '0' : '0',
+      '7px':'7px',
+    },
     maxWidth: {
       '1/4': '25%',
       '1/2': '50%',
@@ -15,12 +19,14 @@ module.exports = {
     },
     extend: {
       colors: {
+        'appleBlue': '#0070c9',
         'appleBlack': '#333333',
         'appleFooter': '#f5f5f7',
         'appleGray': {
           '100': '#515154',
           '200': '#86868b',
           '300': '#999999',
+          '400': '#d6d6d6',
         },
       },
     },
