@@ -86,7 +86,7 @@
       </div>
     </div>
     <div class="footer">
-      ------footer------
+      <Footer/>
     </div>
   </div>
 </template>
@@ -97,10 +97,12 @@ import {
   Vue,
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
+import Footer from '../../components/Footer.vue';
 
 @Component({
   components: {
     NavBar,
+    Footer,
   },
 })
 export default class CartView extends Vue {
