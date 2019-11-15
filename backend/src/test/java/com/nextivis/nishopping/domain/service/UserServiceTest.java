@@ -37,6 +37,29 @@ public class UserServiceTest {
     }
 
     @Test
+    public void findUser__exist() throws IllegalAccessException {
+        User user = createUserBuilder();
+
+        when(userRepository.find(user.getUserId())).thenReturn(Optional.of(user));
+
+        assertThat(target.findUser(user.getUserId())).isEqualTo(user);
+
+        verify(userRepository).find(user.getUserId());
+
+    }
+
+    @Test
+    public void findUser__notExist() {
+        User user = createUserBuilder();
+
+        when(userRepository.find(user.getUserId())).thenReturn(Optional.empty());
+
+        assertThatThrownBy(()->{target.findUser(user.getUserId());}).isInstanceOf(IllegalAccessException.class);
+        verify(userRepository).find(user.getUserId());
+
+    }
+
+    @Test
     public void createUser__newUser() {
         User user = createUserBuilder();
         when(userRepository.find(user.getUserId())).thenReturn(Optional.empty());
