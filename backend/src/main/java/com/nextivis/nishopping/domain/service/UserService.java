@@ -25,6 +25,11 @@ public class UserService {
         return userRepository.create(user);
     }
 
+    public User findUser(String userId) throws IllegalAccessException {
+        return userRepository.find(userId)
+                                          .orElseThrow(() -> new IllegalAccessException("not found"));
+    }
+
     public int updateLastLoggedIn(User user){
         return userRepository.updateLastLoggedIn(user.getUserId(), timeHelper.now());
     }
