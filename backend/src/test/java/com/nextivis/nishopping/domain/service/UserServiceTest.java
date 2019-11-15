@@ -2,7 +2,7 @@ package com.nextivis.nishopping.domain.service;
 
 import com.nextivis.nishopping.domain.entity.*;
 import com.nextivis.nishopping.domain.repository.*;
-import com.nextivis.nishopping.service.helper.*;
+import com.nextivis.nishopping.domain.service.helper.*;
 import org.junit.*;
 import org.junit.runner.*;
 import org.mockito.*;

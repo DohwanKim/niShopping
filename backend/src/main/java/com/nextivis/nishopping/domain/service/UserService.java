@@ -2,7 +2,7 @@ package com.nextivis.nishopping.domain.service;
 
 import com.nextivis.nishopping.domain.entity.User;
 import com.nextivis.nishopping.domain.repository.UserRepository;
-import com.nextivis.nishopping.service.helper.*;
+import com.nextivis.nishopping.domain.service.helper.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

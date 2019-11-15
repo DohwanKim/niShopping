@@ -1,4 +1,4 @@
-package com.nextivis.nishopping.service.helper;
+package com.nextivis.nishopping.domain.service.helper;
 
 import org.springframework.stereotype.*;
 
