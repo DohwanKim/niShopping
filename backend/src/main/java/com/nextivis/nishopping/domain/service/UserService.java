@@ -1,4 +1,4 @@
-package com.nextivis.nishopping.service;
+package com.nextivis.nishopping.domain.service;
 
 import com.nextivis.nishopping.domain.entity.User;
 import com.nextivis.nishopping.domain.repository.UserRepository;
