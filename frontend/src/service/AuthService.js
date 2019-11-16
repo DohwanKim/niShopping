@@ -14,7 +14,7 @@ var uManager = new Oidc.UserManager({
   ...otherConfig,
 });
 
-uManager.events.addUserLoaded(function (user) {  
+uManager.events.addUserLoaded(function (user) {
   console.log('New User Loaded：', arguments);
   console.log('Acess_token: ', user.access_token)
 });
