@@ -22,7 +22,7 @@
         </section>
         <section class="flex flex-wrap main__contents rounded-lg contents-center text-center">
           <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/info')">
               계정 정보
             </div>
             <div class="main__contents--msg">
@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/order')">
               주문 정보
             </div>
             <div class="main__contents--msg">
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/cart')">
               장바구니 정보
             </div>
             <div class="main__contents--msg">
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/like')">
               찜 정보
               </div>
             <div class="main__contents--msg">
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="footer">
-      ------footer------
+      <Footer/>
     </div>
   </div>
 </template>
@@ -68,14 +68,18 @@ import {
   Vue,
 } from 'vue-property-decorator';
 import NavBar from '../components/NavBar.vue';
+import Footer from '../components/Footer.vue';
 
 @Component({
   components: {
     NavBar,
+    Footer
   },
 })
 export default class MyInfoView extends Vue {
-
+  goPage (res:string): void {
+    this.$router.push(res);
+  }
 }
 </script>
 

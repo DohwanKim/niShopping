@@ -6,7 +6,7 @@
     </button>
     <div v-if="isClickMenu" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl" @mouseleave.prevent="isClickMenu = false">
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click.prevent="signIn">로그인</div>
-      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click="apiTest">계정</div>
+      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click="goPage('/myinfo')">계정</div>
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">장바구니</div>
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click.prevent="signOut">로그아웃</div>
     </div>
@@ -41,7 +41,8 @@
       console.log(a);
     }
   }
-  
+}
+
 </script>
 
 <style>

@@ -46,9 +46,7 @@
     </div>
 
     <div class="footer">
-      <div class="bg-gray-600">
-        ------------푸터-------------
-      </div>
+      <Footer/>
     </div>
   </div>
 </template>
@@ -59,11 +57,13 @@ import {
   Vue,
 } from 'vue-property-decorator';
 import NavBar from '../components/NavBar.vue';
+import Footer from '../components/Footer.vue';
 import Card from '../components/Card.vue';
 
 @Component({
   components: {
     NavBar,
+    Footer,
     Card,
   },
 })
