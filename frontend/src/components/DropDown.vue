@@ -14,28 +14,32 @@
 </template>
 
 <script lang="ts">
-import {
-  Component,
-  Vue,
-} from 'vue-property-decorator';
-import AuthService from '../service/AuthService';
+  import AuthService from '../service/AuthService';
+  import apiService from '../service/apiService';
+  import {
+    Vue,
+    Prop,
+    Component,
 
-@Component
-export default class DropDown extends Vue {
-  isClickMenu:boolean = false;
+  } from 'vue-property-decorator';
 
-  authService = new AuthService();
+  @Component
+  export default class DropDown extends Vue {
+    isClickMenu:boolean = false
+    authService = new AuthService();
 
-  signIn() {
-    this.authService.signIn();
-  }
+    signIn() {
+      this.authService.signIn();
+    }
 
-  signOut() {
-    this.authService.signOut();
-  }
+    signOut() {
+      this.authService.signOut();
+    }
 
-  goPage(res:string): void {
-    this.$router.push(res);
+    async apiTest() {
+      var a = await new apiService().defaultGet('/api/user/test');
+      console.log(a);
+    }
   }
 }
 
