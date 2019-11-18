@@ -8,6 +8,11 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   flyway:
     enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://dev-z1noh6-s.auth0.com/.well-known/jwks.json
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
