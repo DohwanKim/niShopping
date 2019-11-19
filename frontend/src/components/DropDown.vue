@@ -6,7 +6,7 @@
     </button>
     <div v-if="isClickMenu" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl" @mouseleave.prevent="isClickMenu = false">
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click.prevent="signIn">로그인</div>
-      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">계정</div>
+      <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click="goPage('/myinfo')">계정</div>
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white">장바구니</div>
       <div class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white" @click.prevent="signOut">로그아웃</div>
     </div>
@@ -15,6 +15,7 @@
 
 <script lang="ts">
   import AuthService from '../service/AuthService';
+  import apiService from '../service/apiService';
   import {
     Vue,
     Prop,
@@ -27,15 +28,21 @@
     isClickMenu:boolean = false
     authService = new AuthService();
 
-    signIn(){
+    signIn() {
       this.authService.signIn();
     }
 
-    signOut(){
+    signOut() {
       this.authService.signOut();
     }
+
+    async apiTest() {
+      var a = await new apiService().defaultGet('/api/user/test');
+      console.log(a);
+    }
   }
-  
+}
+
 </script>
 
 <style>
