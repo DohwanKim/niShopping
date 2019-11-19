@@ -1,6 +1,7 @@
 module.exports = {
   theme: {
     inset: {
+      '-9999px': '-9999px',
       '-46px': '-46px',
       0: '0',
       '1px': '1px',
@@ -50,6 +51,7 @@ module.exports = {
           300: '#999999',
           400: '#d6d6d6',
         },
+        'orange': '#e85d00',
       },
       spacing: {
         '6px': '6px',
@@ -66,6 +68,8 @@ module.exports = {
         xl: '48px',
         '-3.26%': '-3.26%',
         '3.26%': '3.26%',
+        '-0.5': '-0.125rem',
+        15: '3.75rem',
         43: '10.75rem',
       },
       opacity: {
@@ -84,9 +88,13 @@ module.exports = {
         'md': '768px',
         'lg': '1024px',
         'xl': '1280px',
+        '30px': '30px',
       },
       maxHeight: {
         111: '27.75rem',
+      },
+      fontSize: {
+        '3.5xl': '2rem',
       },
     },
   },

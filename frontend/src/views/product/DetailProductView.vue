@@ -90,16 +90,89 @@
         </nav>
       </div>
     </div>
-    <div class="contentContainer">
-      <div class="content">
-        <div class="column">
-          <div class="displayArea">
-            <div id="title"></div>
-            <div id="section"></div>
-            <div id="question"></div>
+    <div role="main" id="main">
+      <div class="main__content">
+        <div class="mx-auto w-full max-w-980px min-w-md z-1 relative ">
+          <div class="column w-4/12 boxsizing_borderbox relative z-1 m-0 p-0 float-left">
+            <div class="pt-15 pb-10">
+              <div id="optionalDescription" class="-mt-1">
+                <span class="mb-4 tracking-normal text-lg font-normal leading-normal block text-orange">New</span>
+              </div>
+              <div id="title" class="-mr-1">
+                <h1 itemprop="name" class="text-3.5xl leading-none font-medium block opacity-100 m-0 p-0">Product Title</h1>
+              </div>
+              <div>
+                <div class="text-xs leading-normal font-normal tracking-normal">
+                  <ul class="m-0 p-0">
+                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                      <span>₩49,000</span>
+                    </li>
+                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                      <span>평점</span>
+                    </li>
+                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                      <span>작가</span>
+                    </li>
+                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                      <span>출판사</span>
+                    </li>
+                    <li class="m-0 p-0">
+                      <div class="pt-5">
+                        <fieldset class="border-0 m-0 p-0">
+                          <legend class="tracking-normal text-lg leading-normal font-normal m-0 p-0">
+                            일단 만든것
+                            <span id="selectedText"> - type</span>
+                          </legend>
+                          <ul class="pl-0 border-t-0 pt-2 p-0 w-full list-none my-0 -mx-0.5">
+                            <li class="mt-0 ml-0 mr-2 mb-1 p-0 float-left ">
+                              <input id="type1" type="radio" class="absolute -left-9999px text-left m-0 p-0">
+                              <label for="type1" class="mb-0 border border-solid border-transparent rounded-full boxsizing_borderbox text-appleBlack cursor-pointer float-left p-1 relative w-10 h-10 z-1">
+                                <span class="rounded-full block w-8 h-8 shadow"></span>
+                              </label>
+                            </li>
+                            <li class="mt-0 ml-0 mr-2 mb-1 p-0 float-left ">
+                              <input id="type2" type="radio" class="absolute -left-9999px text-left m-0 p-0">
+                              <label for="type2" class="mb-0 border border-solid border-transparent rounded-full boxsizing_borderbox text-appleBlack cursor-pointer float-left p-1 relative w-10 h-10 z-1">
+                                <span class="rounded-full block w-8 h-8 shadow"></span>
+                              </label>
+                            </li>
+                            <li class="mt-0 ml-0 mr-2 mb-1 p-0 float-left ">
+                              <input id="type3" type="radio" class="absolute -left-9999px text-left m-0 p-0">
+                              <label for="type3" class="mb-0 border border-solid border-transparent rounded-full boxsizing_borderbox text-appleBlack cursor-pointer float-left p-1 relative w-10 h-10 z-1">
+                                <span class="rounded-full block w-8 h-8 shadow"></span>
+                              </label>
+                            </li>
+                          </ul>
+                        </fieldset>
+                      </div>
+                    </li>
+                    <li class="pt-5 p-0 m-0 ">
+                      <form id="addCart" method="post" action="" class="m-0 p-0 ">
+                        <div class="w-full table">
+                          <div class="table-cell">
+                            <span>
+                              <button type="submit" title="장바구니에 담기" class="bg-appleBlue hover:bg-blue-600 text-white text-center font-normal m-0 py-1 px-4 border border-solid border-blue-700 rounded whitespace-no-wrap text-lg boxsizing_borderbox w-full inline-block leading-normal overflow-visible min-w-30px">
+                                <span>장바구니에 담기</span>
+                              </button>
+                            </span>
+                          </div>
+                          <div class="w-10 table-cell align-middle">
+                            <div class="favorite float-right right-0 relative inline-block">
+                              <button class="relative overflow-visible border-0 top-0 leading-loose w-6 h-6 text-appleBlue inline-block text-2xl text-left" aria-label="즐겨찾기에 추가" tabindex="0">
+                                <span class="far fa-heart absolute overflow-hidden w-6 h-6 p-0 -mt-3">즐겨찾기에 추가</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="column w-7/12"></div>
         </div>
-        <div class="column"></div>
       </div>
     </div>
   </div>
