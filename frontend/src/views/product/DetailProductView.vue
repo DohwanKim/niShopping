@@ -3,7 +3,7 @@
     <div class="nav">
       <NavBar />
     </div>
-    <div class="category border-b border-solid border-appleGray-400 text-xs leading-relaxed font-normal tracking-wider relative top-0 left-0 bg-transparent not-italic z-9997">
+    <div class="category min-w-md border-b border-solid border-appleGray-400 text-xs leading-relaxed font-normal tracking-wider relative top-0 left-0 bg-transparent not-italic z-9997">
       <div class="">
         <nav class="w-full border-b-0 pt-2 relative my-0 mx-auto block">
           <div class="min-w-md w-11/12 mx-auto relative z-2">
@@ -12,7 +12,7 @@
 
           <input type="checkbox" id="localnav-disclosure" class="hidden absolute h-1 w-1 p-0 border-0 overflow-hidden">
 
-          <div class="border-b-0 min-w-md h-12 w-11/12 mx-auto relative z-1">
+          <div class="border-b-0 h-12 w-11/12 mx-auto relative z-1">
             <label id="localNav" @click.prevent="isClickLocalNav = !isClickLocalNav" for="localnav-disclosure" class="top-10px p-0 overflow-visible block relative outline-none float-right left-m2px border-0 cursor-pointer bg-transparent leading-loose">
               <span class="outline-none py-12px text-appleBlack hover:opacity-60">
                 <span class="mr-6px">모두 검색</span>
@@ -171,7 +171,11 @@
               </div>
             </div>
           </div>
-          <div class="column w-7/12"></div>
+          <div class="column w-7/12 float-left left-1/12 relative">
+            <div class="mt-12">
+              <img src="../../assets/img/testbook.jpg" alt="test">
+            </div>
+          </div>
         </div>
       </div>
     </div>
