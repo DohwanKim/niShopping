@@ -22,41 +22,9 @@
         </section>
 
         <section class="main__cart">
-          <div class="main__products--com border-b flex">
-            <div class="w-1/4">
-              <div>
-                <img class="main__products--img">
-              </div>
-            </div>
-            <div class="w-3/4">
-              <div class="flex border-b text-2xl font-semibold">
-                <div class="w-3/6">
-                  상품 이름
-                </div>
-                <div class="w-1/6">
-                  수량 (1)
-                </div>
-                <div class="w-2/6 text-right">
-                  <div>
-                    4달라
-                  </div>
-                  <div class="py-4">
-                    <button class="text-blue-700 font-semibold text-xs hover:text-blue-900 py-2">
-                      취소
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="py-4 text-xl text-appleBlack">
-                배송 예상 시간
-              </div>
-              <div class="text-appleBlack">
-                오늘 주문 시, 배송:
-                금 2019/11/08 - 무료 배송
-              </div>
-            </div>
-          </div>
-
+          <OrderCard />
+          <OrderCard />
+          <OrderCard />
         </section>
 
         <section class="main__total border-b">
@@ -98,11 +66,13 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
+import OrderCard from '../../components/OrderCard.vue';
 
 @Component({
   components: {
     NavBar,
     Footer,
+    OrderCard,
   },
 })
 export default class CartView extends Vue {
