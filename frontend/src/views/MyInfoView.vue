@@ -21,38 +21,10 @@
           </div>
         </section>
         <section class="flex flex-wrap main__contents rounded-lg contents-center text-center">
-          <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/info')">
-              계정 정보
-            </div>
-            <div class="main__contents--msg">
-              설명란 하이하이
-            </div>
-          </div>
-          <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/order')">
-              주문 정보
-            </div>
-            <div class="main__contents--msg">
-              설명란 하이하이
-            </div>
-          </div>
-          <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/cart')">
-              장바구니 정보
-            </div>
-            <div class="main__contents--msg">
-              설명란 하이하이
-            </div>
-          </div>
-          <div class="w-1/2 main__contents--box">
-            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/like')">
-              찜 정보
-              </div>
-            <div class="main__contents--msg">
-              설명란 하이하이
-            </div>
-          </div>
+          <AccountCard /> <!-- 계정 -->
+          <AccountCard /> <!-- 주문 -->
+          <AccountCard /> <!-- 장바구니 -->
+          <AccountCard /> <!-- 찜 -->
         </section>
       </div>
     </div>
@@ -69,11 +41,13 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
+import AccountCard from '../components/AccountCard.vue';
 
 @Component({
   components: {
     NavBar,
-    Footer
+    Footer,
+    AccountCard,
   },
 })
 export default class MyInfoView extends Vue {
@@ -84,9 +58,6 @@ export default class MyInfoView extends Vue {
 </script>
 
 <style scoped>
-#infoView {
-  min-width: 768px;
-}
 .main__grid {
   margin: 0 auto;
   min-width: 768px;
@@ -106,11 +77,6 @@ export default class MyInfoView extends Vue {
   color: rgb(51, 51, 51);
   margin: 8px 0 8px 0;
   padding: 50px 10px 0 10px;
-}
-.main__contents--box {
-  min-height: 150px;
-  padding: 10px;
-  color: rgb(51, 51, 51);
 }
 
 </style>
