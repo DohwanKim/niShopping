@@ -21,10 +21,38 @@
           </div>
         </section>
         <section class="flex flex-wrap main__contents rounded-lg contents-center text-center">
-          <AccountCard /> <!-- 계정 -->
-          <AccountCard /> <!-- 주문 -->
-          <AccountCard /> <!-- 장바구니 -->
-          <AccountCard /> <!-- 찜 -->
+          <div class="w-1/2 main__contents--box">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/info')">
+              계정 정보
+            </div>
+            <div class="main__contents--msg">
+              설명란 하이하이
+            </div>
+          </div>
+          <div class="w-1/2 main__contents--box">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/order')">
+              주문 정보
+            </div>
+            <div class="main__contents--msg">
+              설명란 하이하이
+            </div>
+          </div>
+          <div class="w-1/2 main__contents--box">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/cart')">
+              장바구니 정보
+            </div>
+            <div class="main__contents--msg">
+              설명란 하이하이
+            </div>
+          </div>
+          <div class="w-1/2 main__contents--box">
+            <div class="font-semibold text-xl cursor-pointer" @click="goPage('myinfo/like')">
+              찜 정보
+            </div>
+            <div class="main__contents--msg">
+              설명란 하이하이
+            </div>
+          </div>
         </section>
       </div>
     </div>
@@ -41,42 +69,47 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
-import AccountCard from '../components/AccountCard.vue';
 
 @Component({
   components: {
     NavBar,
     Footer,
-    AccountCard,
   },
 })
 export default class MyInfoView extends Vue {
-  goPage (res:string): void {
+  goPage(res:string): void {
     this.$router.push(res);
   }
 }
 </script>
 
 <style scoped>
-.main__grid {
-  margin: 0 auto;
-  min-width: 768px;
-  max-width: 1024px;
-  width: 100%
-}
-.main__title {
-  min-width: 100%;
-  height: 178px;
-}
-.main_title--grid {
-  min-width: 100%;
-  padding: 10px 10px 0 10px;
-  margin-bottom: 8px;
-}
-.main__contents {
-  color: rgb(51, 51, 51);
-  margin: 8px 0 8px 0;
-  padding: 50px 10px 0 10px;
-}
-
+  #infoView {
+    min-width: 768px;
+  }
+  .main__grid {
+    margin: 0 auto;
+    min-width: 768px;
+    max-width: 1024px;
+    width: 100%
+  }
+  .main__title {
+    min-width: 100%;
+    height: 178px;
+  }
+  .main_title--grid {
+    min-width: 100%;
+    padding: 10px 10px 0 10px;
+    margin-bottom: 8px;
+  }
+  .main__contents {
+    color: rgb(51, 51, 51);
+    margin: 8px 0 8px 0;
+    padding: 50px 10px 0 10px;
+  }
+  .main__contents--box {
+    min-height: 150px;
+    padding: 10px;
+    color: rgb(51, 51, 51);
+  }
 </style>
