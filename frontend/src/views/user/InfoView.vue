@@ -4,6 +4,22 @@
       <NavBar />
     </div>
     <div class="main">
+      <transition name="fade">
+        <div v-if="alertSuccessStatus" class="v-leave-active main__alert opacity-75 absolute bg-blue-100 border-t border-b border-blue-500 text-blue-800 px-4 py-3" role="alert">
+          <p class="font-bold">수정 완료</p>
+          <p class="text-sm">입력하신 정보로 수정되었습니다.</p>
+        </div>
+      </transition>
+      <transition name="fade">
+        <div v-if="alertCancelStatus" role="alert" class="v-leave-active main__alert opacity-75 absolute">
+          <div class="bg-red-700 text-white font-bold rounded-t px-4 py-2">
+            수정 취소
+          </div>
+          <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+            <p>수정을 취소하였습니다. 이전 데이터로 유지됩니다.</p>
+          </div>
+        </div>
+      </transition>
       <div class="main__grid">
         <section class="flex main__title content-center rounded shadow-md">
           <div class="main_title--grid flex content-center flex-wrap">
@@ -112,6 +128,10 @@ import AuthService from '../../service/AuthService';
 export default class InfoView extends Vue {
   modified = 0;
 
+  alertSuccessStatus = 0;
+
+  alertCancelStatus = 0;
+
   userInfo = {
     userEmail: '',
     userName: '',
@@ -142,20 +162,20 @@ export default class InfoView extends Vue {
   changeModified() :void{
     if (this.modified === 0) {
       this.modified = 1;
+    } else if (this.changeInfo.inputAddress === '' || this.changeInfo.inputPhoneNumber === '') {
+      alert('입력되지 않은 정보가 있습니다.');
     } else {
-      if (this.changeInfo.inputAddress === '') {
-        alert("주소가 입력되지 않았습니다.");
-      } else {
-        this.userInfo.userAddress = this.changeInfo.inputAddress;
-        this.userInfo.userPhoneNumber = this.changeInfo.inputPhoneNumber;
-        this.clearModifiedData();
-        this.modified = 0;
-      }
+      this.userInfo.userAddress = this.changeInfo.inputAddress;
+      this.userInfo.userPhoneNumber = this.changeInfo.inputPhoneNumber;
+      this.clearModifiedData();
+      this.toastSuccess();
+      this.modified = 0;
     }
   }
 
   cancelModified() :void{
     this.clearModifiedData();
+    this.toastCancel();
     this.modified = 0;
   }
 
@@ -163,12 +183,29 @@ export default class InfoView extends Vue {
     this.changeInfo.inputAddress = '';
     this.changeInfo.inputPhoneNumber = '';
   }
+
+  toastSuccess() :void{
+    this.alertSuccessStatus = 1;
+    setTimeout(() => {
+      this.alertSuccessStatus = 0;
+    }, 3000);
+  }
+
+  toastCancel() :void{
+    this.alertCancelStatus = 1;
+    setTimeout(() => {
+      this.alertCancelStatus = 0;
+    }, 3000);
+  }
 }
 </script>
 
 <style scoped>
 #infoView {
   min-width: 768px;
+}
+.main__alert {
+  width: 100%;
 }
 .main__grid {
   margin: 0 auto;
@@ -204,9 +241,10 @@ export default class InfoView extends Vue {
 .main__contents--input {
   width: 100%;
 }
-.hidden {
-  visibility: hidden;
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
   opacity: 0;
-  transition: visibility 0s 2s, opacity 2s linear;
 }
 </style>
