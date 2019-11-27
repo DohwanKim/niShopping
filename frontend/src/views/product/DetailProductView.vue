@@ -99,22 +99,22 @@
                 <span class="mb-4 tracking-normal text-lg font-normal leading-normal block text-orange">New</span>
               </div>
               <div id="title" class="-mr-1">
-                <h1 itemprop="name" class="text-3.5xl leading-none font-medium block opacity-100 m-0 p-0">Product Title</h1>
+                <h1 itemprop="name" class="text-3.5xl leading-none font-medium block opacity-100 m-0 p-0">{{ productInfo.name }}</h1>
               </div>
               <div>
                 <div class="text-xs leading-normal font-normal tracking-normal">
                   <ul class="m-0 p-0">
                     <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
-                      <span>₩49,000</span>
+                      <span>{{ productInfo.price }}</span>
                     </li>
                     <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
-                      <span>평점</span>
+                      <span>{{ productInfo.score }}</span>
                     </li>
                     <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
-                      <span>작가</span>
+                      <span>{{ productInfo.author }}</span>
                     </li>
                     <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
-                      <span>출판사</span>
+                      <span>{{ productInfo.publisher }}</span>
                     </li>
                     <li class="m-0 p-0">
                       <div class="pt-5">
@@ -187,15 +187,34 @@ import {
   Component,
   Vue,
 } from 'vue-property-decorator';
+import { mapState } from 'vuex';
 import NavBar from '../../components/NavBar.vue';
+import { productType } from '../../types/product';
+
 
 @Component({
+  computed: {
+    ...mapState({
+      productInfo: 'product',
+    }),
+  },
   components: {
     NavBar,
   },
 })
 export default class DetailProductView extends Vue {
   isClickLocalNav:boolean= false;
+
+  private productInfo!: productType;
+
+  mounted() {
+    this.getProductInfo();
+  }
+
+  getProductInfo(): productType {
+    console.log('productInfo ', this.productInfo);
+    return this.productInfo;
+  }
 }
 </script>
 
