@@ -5,7 +5,6 @@
     </div>
     <div class="main">
       <div class="main__grid">
-
         <section class="flex main__title content-center rounded shadow-md">
           <div class="main_title--grid flex content-center flex-wrap">
             <div class="w-full p-2">
@@ -23,21 +22,66 @@
         </section>
 
         <section class="main__contents border rounded-lg flex shadow-md">
-          <div class="w-1/4">
-            <div class="main_contents--title font-semibold">계정 정보</div>
+          <div class="w-1/4 main_contents--title font-semibold">
+            <div class="">계정 정보</div>
+            <div v-show="modified === 0">
+              <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
+                <span @click="changeModified()">수정</span>
+              </button>
+            </div>
+            <div class="" v-show="modified === 1">
+              <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
+                <span @click="changeModified()">수정 완료</span>
+              </button>
+              <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline px-2">
+                <span @click="cancelModified()">수정 취소</span>
+              </button>
+            </div>
           </div>
           <div class="w-3/4">
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
-              ID
+              이메일(아이디)
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              ID_contents
+              {{ userInfo.userEmail }}
             </div>
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
-              PW
+              이름
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              PW_contents
+              {{ userInfo.userName }}
+            </div>
+            <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
+              닉네임
+            </div>
+            <div class="main__contents--box-b rounded-b-lg shadow-md">
+              {{ userInfo.userNick }}
+            </div>
+            <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
+              주소
+            </div>
+            <div class="main__contents--box-b rounded-b-lg shadow-md">
+              <div v-show="modified === 0">
+                {{ userInfo.userAddress }}
+              </div>
+              <div v-show="modified === 1">
+                <label>
+                  <input class="placeholder-gray-500 border main__contents--input" v-model="changeInfo.inputAddress" placeholder="새로운 정보를 입력해 주세요">
+                </label>
+              </div>
+            </div>
+            <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
+              전화번호
+            </div>
+            <div class="main__contents--box-b rounded-b-lg shadow-md">
+              <div v-show="modified === 0">
+                {{ userInfo.userPhoneNumber }}
+              </div>
+              <div v-show="modified === 1">
+                <label>
+                  <input class="placeholder-gray-500 border main__contents--input" v-model="changeInfo.inputPhoneNumber" placeholder="새로운 정보를 입력해 주세요">
+                </label>
+              </div>
             </div>
           </div>
         </section>
@@ -57,6 +101,7 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
+import AuthService from '../../service/AuthService';
 
 @Component({
   components: {
@@ -65,7 +110,59 @@ import Footer from '../../components/Footer.vue';
   },
 })
 export default class InfoView extends Vue {
+  modified = 0;
 
+  userInfo = {
+    userEmail: '',
+    userName: '',
+    userNick: '',
+    userImage: '',
+    userAddress: '',
+    userPhoneNumber: '',
+  };
+
+  changeInfo = {
+    inputAddress: '',
+    inputPhoneNumber: '',
+  };
+
+  created() {
+    new AuthService().getUser().then((res) => {
+      if (res) {
+        this.userInfo.userEmail = res.profile.email;
+        this.userInfo.userName = res.profile.name;
+        this.userInfo.userNick = res.profile.nickname;
+        this.userInfo.userImage = res.profile.picture;
+        this.userInfo.userAddress = res.profile.address;
+        this.userInfo.userPhoneNumber = res.profile.phoneNumber;
+      }
+    });
+  }
+
+  changeModified() :void{
+    if (this.modified === 0) {
+      this.modified = 1;
+    } else {
+      if (this.changeInfo.inputAddress === '') {
+        alert("주소가 입력되지 않았습니다.");
+      } else {
+        this.userInfo.userAddress = this.changeInfo.inputAddress;
+        this.userInfo.userPhoneNumber = this.changeInfo.inputPhoneNumber;
+        this.clearModifiedData();
+        this.modified = 0;
+      }
+    }
+  }
+
+  cancelModified() :void{
+    this.clearModifiedData();
+    this.modified = 0;
+  }
+
+  clearModifiedData() :void{
+    this.changeInfo.inputAddress = '';
+    this.changeInfo.inputPhoneNumber = '';
+  }
 }
 </script>
 
@@ -104,5 +201,12 @@ export default class InfoView extends Vue {
   margin: 0 5px 10px 5px;
   padding: 10px;
 }
-
+.main__contents--input {
+  width: 100%;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
 </style>
