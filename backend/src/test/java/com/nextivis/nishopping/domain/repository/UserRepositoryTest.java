@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -54,13 +55,17 @@ public class UserRepositoryTest {
     public void find() {
         // TODO: UTC VS KST
         User actualUser = createUserBuilder();
+        User expected = null;
         target.create(actualUser);
 
-        User expected = target.find(actualUser.getUserId());
+        Optional<User> findUser = target.find(actualUser.getUserId());
 
-        expected.setBirthDate(expected.getBirthDate().plusHours(9));
-        expected.setRegisterDate(expected.getRegisterDate().plusHours(9));
-        expected.setLastLoggedIn(expected.getLastLoggedIn().plusHours(9));
+        if(findUser.isPresent()) {
+            expected = findUser.get();
+            expected.setBirthDate(expected.getBirthDate().plusHours(9));
+            expected.setRegisterDate(expected.getRegisterDate().plusHours(9));
+            expected.setLastLoggedIn(expected.getLastLoggedIn().plusHours(9));
+        }
 
         assertThat(actualUser).isEqualTo(expected);
     }
@@ -68,16 +73,20 @@ public class UserRepositoryTest {
     @Test
     public void updateUserInfo() {
         User expected = createUserBuilder();
+        User actual = null;
         target.create(expected);
         expected.setAddress("Update Address");
         expected.setEmail("Update Email");
         target.updateUserInfo(expected);
 
-        User actual = target.find(expected.getUserId());
+        Optional<User> findUser =  target.find(expected.getUserId());
 
-        actual.setBirthDate(actual.getBirthDate().plusHours(9));
-        actual.setRegisterDate(actual.getRegisterDate().plusHours(9));
-        actual.setLastLoggedIn(actual.getLastLoggedIn().plusHours(9));
+        if(findUser.isPresent()) {
+            actual = findUser.get();
+            actual.setBirthDate(actual.getBirthDate().plusHours(9));
+            actual.setRegisterDate(actual.getRegisterDate().plusHours(9));
+            actual.setLastLoggedIn(actual.getLastLoggedIn().plusHours(9));
+        }
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -85,17 +94,21 @@ public class UserRepositoryTest {
     @Test
     public void updateLastLoggedIn() {
         User expected = createUserBuilder();
+        User actual = null;
         LocalDateTime updateLastLogedInDateTime = LocalDateTime.now().plusDays(3).plusHours(10).truncatedTo(ChronoUnit.SECONDS);
 
         target.create(expected);
         target.updateLastLoggedIn(expected.getUserId(), updateLastLogedInDateTime);
         expected.setLastLoggedIn(updateLastLogedInDateTime);
 
-        User actual = target.find(expected.getUserId());
+        Optional<User> findUser = target.find(expected.getUserId());
 
-        actual.setBirthDate(actual.getBirthDate().plusHours(9));
-        actual.setRegisterDate(actual.getRegisterDate().plusHours(9));
-        actual.setLastLoggedIn(actual.getLastLoggedIn().plusHours(9));
+        if(findUser.isPresent()) {
+            actual = findUser.get();
+            actual.setBirthDate(actual.getBirthDate().plusHours(9));
+            actual.setRegisterDate(actual.getRegisterDate().plusHours(9));
+            actual.setLastLoggedIn(actual.getLastLoggedIn().plusHours(9));
+        }
 
         assertThat(actual).isEqualTo(expected);
     }
