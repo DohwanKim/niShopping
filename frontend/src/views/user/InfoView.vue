@@ -40,12 +40,12 @@
         <section class="main__contents border rounded-lg flex shadow-md">
           <div class="w-1/4 main_contents--title font-semibold">
             <div class="">계정 정보</div>
-            <div v-show="modified === 0">
+            <div v-if="modified === false">
               <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
                 <span @click="changeModified()">수정</span>
               </button>
             </div>
-            <div class="" v-show="modified === 1">
+            <div class="" v-if="modified === true">
               <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
                 <span @click="changeModified()">수정 완료</span>
               </button>
@@ -77,10 +77,10 @@
               주소
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              <div v-show="modified === 0">
+              <div v-if="modified === false">
                 {{ userInfo.userAddress }}
               </div>
-              <div v-show="modified === 1">
+              <div v-if="modified === true">
                 <label>
                   <input class="placeholder-gray-500 border main__contents--input" v-model="changeInfo.inputAddress" placeholder="새로운 정보를 입력해 주세요">
                 </label>
@@ -90,10 +90,10 @@
               전화번호
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              <div v-show="modified === 0">
+              <div v-if="modified === false">
                 {{ userInfo.userPhoneNumber }}
               </div>
-              <div v-show="modified === 1">
+              <div v-if="modified === true">
                 <label>
                   <input class="placeholder-gray-500 border main__contents--input" v-model="changeInfo.inputPhoneNumber" placeholder="새로운 정보를 입력해 주세요">
                 </label>
@@ -126,11 +126,11 @@ import AuthService from '../../service/AuthService';
   },
 })
 export default class InfoView extends Vue {
-  modified = 0;
+  modified: boolean = false;
 
-  alertSuccessStatus = 0;
+  alertSuccessStatus: boolean = false;
 
-  alertCancelStatus = 0;
+  alertCancelStatus: boolean = false;
 
   userInfo = {
     userEmail: '',
@@ -160,8 +160,8 @@ export default class InfoView extends Vue {
   }
 
   changeModified() :void{
-    if (this.modified === 0) {
-      this.modified = 1;
+    if (!this.modified) {
+      this.modified = true;
     } else if (this.changeInfo.inputAddress === '' || this.changeInfo.inputPhoneNumber === '') {
       alert('입력되지 않은 정보가 있습니다.');
     } else {
@@ -169,14 +169,14 @@ export default class InfoView extends Vue {
       this.userInfo.userPhoneNumber = this.changeInfo.inputPhoneNumber;
       this.clearModifiedData();
       this.toastSuccess();
-      this.modified = 0;
+      this.modified = false;
     }
   }
 
   cancelModified() :void{
     this.clearModifiedData();
     this.toastCancel();
-    this.modified = 0;
+    this.modified = false;
   }
 
   clearModifiedData() :void{
@@ -185,16 +185,16 @@ export default class InfoView extends Vue {
   }
 
   toastSuccess() :void{
-    this.alertSuccessStatus = 1;
+    this.alertSuccessStatus = true;
     setTimeout(() => {
-      this.alertSuccessStatus = 0;
+      this.alertSuccessStatus = false;
     }, 3000);
   }
 
   toastCancel() :void{
-    this.alertCancelStatus = 1;
+    this.alertCancelStatus = true;
     setTimeout(() => {
-      this.alertCancelStatus = 0;
+      this.alertCancelStatus = false;
     }, 3000);
   }
 }
