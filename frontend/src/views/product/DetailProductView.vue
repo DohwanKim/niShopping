@@ -151,7 +151,7 @@
                         <div class="w-full table">
                           <div class="table-cell">
                             <span>
-                              <button @click.prevent="addMyCard" type="submit" title="장바구니에 담기" class="bg-appleBlue hover:bg-blue-600 text-white text-center font-normal m-0 py-1 px-4 border border-solid border-blue-700 rounded whitespace-no-wrap text-lg boxsizing_borderbox w-full inline-block leading-normal overflow-visible min-w-30px">
+                              <button @click.prevent="addMyCart" type="submit" title="장바구니에 담기" class="bg-appleBlue hover:bg-blue-600 text-white text-center font-normal m-0 py-1 px-4 border border-solid border-blue-700 rounded whitespace-no-wrap text-lg boxsizing_borderbox w-full inline-block leading-normal overflow-visible min-w-30px">
                                 <span>장바구니에 담기</span>
                               </button>
                             </span>
@@ -241,7 +241,7 @@ export default class DetailProductView extends Vue {
     console.log('productInfo ', this.productInfo);
   }
 
-  addMyCard(): void {
+  addMyCart(): void {
     /*
     * login check -> userInfo의 cart에 productId 추가
     */
