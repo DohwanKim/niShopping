@@ -16,13 +16,13 @@
             <label id="localNav" @click.prevent="isClickLocalNav = !isClickLocalNav" for="localnav-disclosure" class="top-10px p-0 overflow-visible block relative outline-none float-right left-m2px border-0 cursor-pointer bg-transparent leading-loose">
               <span class="outline-none py-12px text-appleBlack hover:opacity-60">
                 <span class="mr-6px">모두 검색</span>
-                <span v-if="!isClickLocalNav" class="fas fa-chevron-down" aria-hidden="true" role="button" tabindex="0" aria-controls="localnav-tray" :aria-expanded="isClickLocalNav"></span>
+                <span v-if="!isClickLocalNav" class="fas fa-chevron-down" aria-hidden="true" role="button" tabindex="0" aria-controls="localnav-tray" :aria-expanded="[isClickLocalNav]"></span>
                 <span v-else class="fas fa-chevron-up"></span>
               </span>
             </label>
           </div>
 
-          <div class="-z-1 w-full absolute left-0 overflow-hidden pointer-events-none" :class="[isClickLocalNav ? ['top-0', 'pointer-events-auto'] : ['-top-46px', 'pointer-events-none'] ]" :aria-hidden="isClickLocalNav">
+          <div class="-z-1 w-full absolute left-0 overflow-hidden pointer-events-none" :class="[isClickLocalNav ? ['top-0', 'pointer-events-auto'] : ['-top-46px', 'pointer-events-none'] ]" :aria-hidden="[isClickLocalNav]">
             <div class="my-0 mx-auto relative overflow-hidden boxsizing_borderbox" :class="[isClickLocalNav ? ['pt-58px', 'border-b', 'border-solid','border-appleGray-400','w-full','bg-white','pointer-events-auto'] : ['pt-98px', 'border-b-0','bg-transparent','pointer-events-none','w-11/12']]">
               <div class="h-auto w-full min-w-md tracking-normal leading-normal font-normal text-sm mx-auto mt-0 mb-12 pt-6 relative z-1 max-w-980px">
                 <div class="w-1/4 boxsizing_borderbox relative z-1 m-0 p-0 float-left">
@@ -104,16 +104,16 @@
               <div>
                 <div class="text-xs leading-normal font-normal tracking-normal">
                   <ul class="m-0 p-0">
-                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
                       <span>{{ productInfo.price }}</span>
                     </li>
-                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
                       <span>{{ productInfo.score }}</span>
                     </li>
-                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
                       <span>{{ productInfo.author }}</span>
                     </li>
-                    <li class="tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
                       <span>{{ productInfo.publisher }}</span>
                     </li>
                     <li class="m-0 p-0">
@@ -151,14 +151,14 @@
                         <div class="w-full table">
                           <div class="table-cell">
                             <span>
-                              <button type="submit" title="장바구니에 담기" class="bg-appleBlue hover:bg-blue-600 text-white text-center font-normal m-0 py-1 px-4 border border-solid border-blue-700 rounded whitespace-no-wrap text-lg boxsizing_borderbox w-full inline-block leading-normal overflow-visible min-w-30px">
+                              <button @click.prevent="addMyCard" type="submit" title="장바구니에 담기" class="bg-appleBlue hover:bg-blue-600 text-white text-center font-normal m-0 py-1 px-4 border border-solid border-blue-700 rounded whitespace-no-wrap text-lg boxsizing_borderbox w-full inline-block leading-normal overflow-visible min-w-30px">
                                 <span>장바구니에 담기</span>
                               </button>
                             </span>
                           </div>
                           <div class="w-10 table-cell align-middle">
                             <div class="favorite float-right right-0 relative inline-block">
-                              <button class="relative overflow-visible border-0 top-0 leading-loose w-6 h-6 text-appleBlue inline-block text-2xl text-left" aria-label="즐겨찾기에 추가" tabindex="0">
+                              <button @click.prevent="addMyLike" class="relative overflow-visible border-0 top-0 leading-loose w-6 h-6 text-appleBlue inline-block text-2xl text-left" aria-label="즐겨찾기에 추가" tabindex="0">
                                 <span class="far fa-heart absolute overflow-hidden w-6 h-6 p-0 -mt-3">즐겨찾기에 추가</span>
                               </button>
                             </div>
@@ -173,7 +173,7 @@
           </div>
           <div class="column w-7/12 float-left left-1/12 relative">
             <div class="mt-12">
-              <img src="../../assets/img/testbook.jpg" alt="test">
+              <img :src="require(`../../${productInfo.image}`)" :alt="'test'">
             </div>
           </div>
         </div>
@@ -185,35 +185,72 @@
 <script lang="ts">
 import {
   Component,
+  Prop,
+  Watch,
   Vue,
 } from 'vue-property-decorator';
-import { mapState } from 'vuex';
 import NavBar from '../../components/NavBar.vue';
 import { productType } from '../../types/product';
-
+import ApiService from '../../service/apiService';
 
 @Component({
-  computed: {
-    ...mapState({
-      productInfo: 'product',
-    }),
-  },
   components: {
     NavBar,
   },
 })
 export default class DetailProductView extends Vue {
+  @Prop(String) readonly productId: string | undefined;
+
   isClickLocalNav:boolean= false;
 
-  private productInfo!: productType;
+  private productInfo: productType | object = {};
 
-  mounted() {
-    this.getProductInfo();
+  private apiService = new ApiService();
+
+  @Watch('productId', { immediate: true })
+  getProductInfo(): void {
+    console.log('productId', this.productId);
+    this.productInfo = {};
+
+
+    /* call api through mapActions method to get only one product info */
+    // this.apiService.defaultGet(`/findOneProductInfo?${this.productId}`).then((proInfo) => {
+    //   this.productInfo = proInfo;
+    // });
+
+    /* test data */
+    this.productInfo = {
+      id: 0,
+      name: 'TEST',
+      price: 39000,
+      salesRate: 9.9,
+      promotion: 'test',
+      seller: 'test',
+      image: 'assets/img/testbook.jpg',
+      stock: 213,
+      summary: 'test',
+      score: 4.5,
+      release: 'test',
+      translator: 'test',
+      author: 'test',
+      publisher: 'test',
+      size: 'test',
+      weight: 'test',
+      pages: 213,
+    };
+    console.log('productInfo ', this.productInfo);
   }
 
-  getProductInfo(): productType {
-    console.log('productInfo ', this.productInfo);
-    return this.productInfo;
+  addMyCard(): void {
+    /*
+    * login check -> userInfo의 cart에 productId 추가
+    */
+  }
+
+  addMyLike(): void {
+    /*
+    * login check -> userInfo의 like에 productId 추가
+    */
   }
 }
 </script>

@@ -8,6 +8,7 @@ import UserLikeView from '../views/user/LikeView.vue';
 import UserOrderView from '../views/user/OrderView.vue';
 import UserOrderDetailView from '../views/user/OrderDetailView.vue';
 import AuthService from '../service/AuthService';
+import DetailProductView from '../views/product/DetailProductView.vue';
 
 Vue.use(VueRouter);
 
@@ -68,6 +69,15 @@ const routes = [
       requireAuth: true,
     },
   },
+  {
+    path: '/product/:productId',
+    name: 'DetailProductView',
+    component: DetailProductView,
+    props: true,
+    meta: {
+      requireAuth: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
@@ -79,14 +89,14 @@ const router = new VueRouter({
 const authService = new AuthService();
 router.beforeEach(async (to, _, next) => {
   let user = await authService.getUser();
-  console.log(user)
+  console.log(user);
   if (to.path === '/callback') {
     await authService.siginCallback();
     next('/');
   }
   if (to.path === '/logout') {
-    alert('success logout')
-    next('/')
+    alert('success logout');
+    next('/');
   }
   if (to.meta.requireAuth && user == null) {
     await authService.signIn();
