@@ -4,17 +4,18 @@ import {
   clientConfig,
   clientUrl,
   otherConfig,
+  metadata
 } from '../config/authConfig';
 
 var uManager = new Oidc.UserManager({
-  userStore: new Oidc.WebStorageStateStore(),
   ...authConfig,
   ...clientConfig,
   ...clientUrl,
   ...otherConfig,
+  metadata
 });
 
-uManager.events.addUserLoaded(function (user) {  
+uManager.events.addUserLoaded(function (user) {
   console.log('New User Loaded：', arguments);
   console.log('Acess_token: ', user.access_token)
 });
@@ -24,7 +25,7 @@ uManager.events.addAccessTokenExpiring(function () {
 });
 
 uManager.events.addAccessTokenExpired(function () {
-  console.log('AccessToken Expired：', arguments);  
+  console.log('AccessToken Expired：', arguments);
   alert('Session expired. Going out!');
   uManager.signoutRedirect().then(function (resp) {
     console.log('signed out', resp);
@@ -39,7 +40,7 @@ uManager.events.addSilentRenewError(function () {
 
 uManager.events.addUserSignedOut(function () {
   alert('Going out!');
-  console.log('UserSignedOut：', arguments);  
+  console.log('UserSignedOut：', arguments);
   uManager.signoutRedirect().then(function (resp) {
     console.log('signed out', resp);
   }).catch(function (err) {

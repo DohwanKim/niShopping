@@ -1,14 +1,14 @@
 import axios from 'axios'
-import Mgr from './AuthService'
+import AuthService from './AuthService'
 
-const baseUrl = 'https://localhost:9000/api';
-var user = new Mgr()
+const baseUrl = 'http://localhost:9000';
+var user = new AuthService();
 
 export default class ApiService {
   async defineHeaderAxios () {
-    await user.getAcessToken().then(
-      acessToken => {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + acessToken
+    await user.getUser().then(
+      userInfo => {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + userInfo.id_token;
       }, err => {
         console.log(err)
       })  
