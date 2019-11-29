@@ -14,6 +14,8 @@ public class Product {
     @NotNull
     private long pid;
     @NotNull
+    private String name;
+    @NotNull
     private int price;
     private int salesRage;
     private String promotion;
@@ -31,6 +33,7 @@ public class Product {
     private String author;
     @NotNull
     private String publisher;
+    private String summary;
     private String size;
     private Float weight;
 }
