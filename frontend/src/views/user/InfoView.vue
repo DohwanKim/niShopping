@@ -40,17 +40,17 @@
         <section class="main__contents border rounded-lg flex shadow-md">
           <div class="w-1/4 main_contents--title font-semibold">
             <div class="">계정 정보</div>
-            <div v-if="modified === false">
+            <div v-if="modifiedOff">
               <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
-                <span @click="changeModified()">수정</span>
+                <span @click="changeModified">수정</span>
               </button>
             </div>
-            <div class="" v-if="modified === true">
+            <div class="" v-if="modifiedOn">
               <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
-                <span @click="changeModified()">수정 완료</span>
+                <span @click="changeModified">수정 완료</span>
               </button>
               <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline px-2">
-                <span @click="cancelModified()">수정 취소</span>
+                <span @click="cancelModified">수정 취소</span>
               </button>
             </div>
           </div>
@@ -77,10 +77,10 @@
               주소
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              <div v-if="modified === false">
+              <div v-if="modifiedOff">
                 {{ userInfo.userAddress }}
               </div>
-              <div v-if="modified === true">
+              <div v-if="modifiedOn">
                 <label>
                   <input class="placeholder-gray-500 border main__contents--input" v-model="changeInfo.inputAddress" placeholder="새로운 정보를 입력해 주세요">
                 </label>
@@ -90,10 +90,10 @@
               전화번호
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              <div v-if="modified === false">
+              <div v-if="modifiedOff">
                 {{ userInfo.userPhoneNumber }}
               </div>
-              <div v-if="modified === true">
+              <div v-if="modifiedOn">
                 <label>
                   <input class="placeholder-gray-500 border main__contents--input" v-model="changeInfo.inputPhoneNumber" placeholder="새로운 정보를 입력해 주세요">
                 </label>
@@ -157,6 +157,14 @@ export default class InfoView extends Vue {
         this.userInfo.userPhoneNumber = res.profile.phoneNumber;
       }
     });
+  }
+
+  get modifiedOff() {
+    return !this.modified;
+  }
+
+  get modifiedOn() {
+    return this.modified;
   }
 
   changeModified() :void{
