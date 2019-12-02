@@ -34,4 +34,11 @@ export default class LikeCard extends Vue {
 </script>
 
 <style scoped>
+.main__like--img {
+  min-height: 300px;
+}
+.main__products--img {
+  object-fit: cover;
+  content:url("https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MWU22?wid=800&hei=800&fmt=jpeg&qlt=80&op_usm=0.5,1.5&fit=constrain&.v=1566949271552");
+}
 </style>
