@@ -3,17 +3,17 @@
     <div class="nav">
       <NavBar />
     </div>
-    <div class="category min-w-md border-b border-solid border-appleGray-400 text-xs leading-relaxed font-normal tracking-wider relative top-0 left-0 bg-transparent not-italic z-9997">
+    <div class="category min-w-md z-9997">
       <div class="">
         <nav class="w-full border-b-0 pt-2 relative my-0 mx-auto block">
           <div class="min-w-md w-11/12 mx-auto relative z-2">
-            <a class="mt-6px mb-15px mx-0 p-0 text-appleBlack block float-left h-5 bg-left-top bg-no-repeat text-2xl leading-tight font-medium tracking-normal cursor-auto ">상위 카테고리</a>
+            <a class="category__title">상위 카테고리</a>
           </div>
 
           <input type="checkbox" id="localnav-disclosure" class="hidden absolute h-1 w-1 p-0 border-0 overflow-hidden">
 
           <div class="border-b-0 h-12 w-11/12 mx-auto relative z-1">
-            <label id="localNav" @click.prevent="isClickLocalNav = !isClickLocalNav" for="localnav-disclosure" class="top-10px p-0 overflow-visible block relative outline-none float-right left-m2px border-0 cursor-pointer bg-transparent leading-loose">
+            <label id="localNav" @click.prevent="isClickLocalNav = !isClickLocalNav" for="localnav-disclosure" class="category__switch">
               <span class="outline-none py-12px text-appleBlack hover:opacity-60">
                 <span class="mr-6px">모두 검색</span>
                 <span v-if="!isClickLocalNav" class="fas fa-chevron-down" aria-hidden="true" role="button" tabindex="0" aria-controls="localnav-tray" :aria-expanded="[isClickLocalNav]"></span>
@@ -29,20 +29,20 @@
                   <div class="py-px px-0">
                     <div class="tracking-normal text-sm leading-normal font-semibold m-0 relative top-1px" :class="[isClickLocalNav ? ['opacity-100', 'pointer-events-auto'] : ['opacity-0', 'pointer-events-none']]">제품별로 쇼핑하기</div>
                     <ul class="w-full h-auto pl-10px p-0 mt-1 mr-0 -mb-1 -ml-2 overflow-hidden text-center float-none" :class="[isClickLocalNav ? ['min-w-full','max-w-full'] : []]">
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-full'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
                     </ul>
                   </div>
@@ -51,35 +51,35 @@
                   <div class="border-l border-solid -ml-3.26% pl-3.26% py-px px-0" :class="[isClickLocalNav ? ['border-appleGray-400'] : ['border-transparent']]">
                     <div class="tracking-normal text-sm leading-normal font-semibold m-0 relative top-1px" :class="[isClickLocalNav ? ['opacity-100', 'pointer-events-auto'] : ['opacity-0', 'pointer-events-none']]">카테고리별로 쇼핑하기</div>
                     <ul class="w-full h-43 max-h-111 pl-10px p-0 mt-1 mr-0 -mb-1 -ml-2 overflow-hidden text-center float-none flex flex-col flex-wrap content-start justify-start" :class="[isClickLocalNav ? ['min-w-full','max-w-full'] : []]">
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
-                      <li class="m-0 float-left pr-4 p-0 h-8 leading-moreLoose boxsizing_borderbox text-left relative z-1" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
-                        <a class="boxsizing_borderbox max-w-full p-0 mb-1 m-0 align-bottom leading-normal font-normal text-center text-appleBlack inline-block" :class="[isClickLocalNav ? ['opacity-100','pointer-events-auto','tracking-normal','overflow-hidden','text-sm','whitespace-no-wrap','txtoverflow'] : ['opacity-0','pointer-events-none','text-xs','tracking-wide','whitespace-normal']]" href="">test</a>
+                      <li class="category__list" :class="[isClickLocalNav ? ['w-1/3'] : ['w-48']]">
+                        <a class="category__list_txt" :class="[isClickLocalNav ? ['category__list_txt--on'] : ['category__list_txt--off']]" href="">test</a>
                       </li>
                     </ul>
                   </div>
@@ -104,16 +104,16 @@
               <div>
                 <div class="text-xs leading-normal font-normal tracking-normal">
                   <ul class="m-0 p-0">
-                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="main__list">
                       <span>{{ productInfo.price }}</span>
                     </li>
-                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="main__list">
                       <span>{{ productInfo.score }}</span>
                     </li>
-                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="main__list">
                       <span>{{ productInfo.author }}</span>
                     </li>
-                    <li class="flex tracking-normal pb-10px p-0 mt-6px m-0 text-base leading-normal font-normal inline-block text-appleBlack">
+                    <li class="main__list">
                       <span>{{ productInfo.publisher }}</span>
                     </li>
                     <li class="m-0 p-0">
@@ -151,14 +151,14 @@
                         <div class="w-full table">
                           <div class="table-cell">
                             <span>
-                              <button @click.prevent="addMyCart" type="submit" title="장바구니에 담기" class="bg-appleBlue hover:bg-blue-600 text-white text-center font-normal m-0 py-1 px-4 border border-solid border-blue-700 rounded whitespace-no-wrap text-lg boxsizing_borderbox w-full inline-block leading-normal overflow-visible min-w-30px">
+                              <button @click.prevent="addMyCart" type="submit" title="장바구니에 담기" class="main__cart_button hover:bg-blue-600">
                                 <span>장바구니에 담기</span>
                               </button>
                             </span>
                           </div>
                           <div class="w-10 table-cell align-middle">
                             <div class="favorite float-right right-0 relative inline-block">
-                              <button @click.prevent="addMyLike" class="relative overflow-visible border-0 top-0 leading-loose w-6 h-6 text-appleBlue inline-block text-2xl text-left" aria-label="즐겨찾기에 추가" tabindex="0">
+                              <button @click.prevent="addMyLike" class="main__like_button" aria-label="즐겨찾기에 추가" tabindex="0">
                                 <span class="far fa-heart absolute overflow-hidden w-6 h-6 p-0 -mt-3">즐겨찾기에 추가</span>
                               </button>
                             </div>
@@ -262,7 +262,134 @@ export default class DetailProductView extends Vue {
     box-sizing: border-box;
   }
 
-  .txtoverflow {
+  .category {
+    position: relative;
+    border-bottom: 1px solid #d6d6d6;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.625;
+    letter-spacing: 0.05em;
+    background-color: transparent;
+    font-style: normal;
+    left: 0;
+    top: 0;
+  }
+
+  .category__title {
+    display: block;
+    margin: 6px 0 15px 0;
+    padding: 0;
+    color: #333333;
+    float: left;
+    height: 20px;
+    background-position: left top;
+    background-repeat: no-repeat;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: 0;
+    cursor: auto;
+  }
+
+  .category__switch {
+    display: block;
+    position: relative;
+    top: 10px;
+    left: -2px;
+    padding: 0;
+    overflow: visible;
+    outline: 0;
+    float: right;
+    border-width: 0;
+    cursor: pointer;
+    background-color: transparent;
+    line-height: 2;
+  }
+
+  .category__list {
+    position: relative;
+    float: left;
+    padding: 0 16px 0 0;
+    margin: 0;
+    height: 32px;
+    line-height: 2.5;
+    box-sizing: border-box;
+    text-align: left;
+    z-index: 1;
+  }
+
+  .category__list_txt {
+    display: inline-block;
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 0;
+    margin: 0 0 4px 0;
+    vertical-align: bottom;
+    line-height: 1.5;
+    font-weight: 400;
+    text-align: center;
+    color: #333333;
+  }
+
+  .category__list_txt--on {
+    opacity: 1;
+    pointer-events: auto;
+    letter-spacing: 0;
+    overflow: hidden;
+    font-size: 14px;
+    white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .category__list_txt--off {
+    opacity: 0;
+    pointer-events: none;
+    font-size: 12px;
+    letter-spacing: 0.025em;
+    white-space: normal;
+  }
+
+  .main__list {
+    display: flex;
+    letter-spacing: 0;
+    padding: 0 0 10px 0;
+    margin: 6px 0 0 0;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #333333;
+  }
+
+  .main__cart_button {
+    display: inline-block;
+    background-color: #0070c9;
+    color: #fff;
+    text-align: center;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    padding: 4px 16px;
+    border: 1px solid #2b6cb0;
+    border-radius: .25rem;
+    white-space: nowrap;
+    font-size: 18px;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 30px;
+    overflow: visible;
+  }
+
+  .main__like_button {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    border-width: 0;
+    top: 0;
+    line-height: 2;
+    width: 24px;
+    height: 24px;
+    color: #0070c9;
+    font-size: 24px;
+    text-align: left;
   }
 </style>

@@ -10,7 +10,7 @@
         <button v-if="!isClickSearch" @click.prevent="isClickSearch = true" class="fixed inset-0 h-full w-full cursor-default"></button>
         <div id="searchfield" v-if="!isClickSearch" class="absolute w-3/5">
           <div class="container mx-auto py-4 rounded">
-            <input type="search" placeholder="Search..." autofocus="autofocus" class="w-full bg-appleBlack text-white placeholder-white transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl">
+            <input type="search" placeholder="Search..." autofocus="autofocus" class="nav__search placeholder-white focus:outline-none focus:border-transparent lg:text-2xl">
           </div>
         </div>
 
@@ -55,4 +55,13 @@ export default class NavBar extends Vue {
 </script>
 
 <style>
+  .nav__search {
+    width: 100%;
+    background-color: #333333;
+    color: #fff;
+    padding: 8px;
+    appearance: none;
+    line-height: 1.5;
+    font-size: 20px;
+  }
 </style>
