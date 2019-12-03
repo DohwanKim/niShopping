@@ -10,7 +10,7 @@
         </div>
         <div class="w-2/12">
           <div class="pl-2 -mt-1">
-            <div class="inline-block relative">
+            <div class="select inline-block relative">
               <select class="w-8 border-0 p-0 mb-0 bg-transparent" value="1" aria-label="수량" ref="myselect">
                 <option value="1" selected="true">1</option>
                 <option value="2">2</option>
@@ -20,7 +20,7 @@
                 <option value="6">6</option>
                 <option value="7">7</option>
               </select>
-              <span class="icon text-base block absolute leading-tight fas fa-chevron-down text-appleBlue top-7px right-0" aria-hidden="true">
+              <span class="icon select__icon fas fa-chevron-down" aria-hidden="true">
               </span>
             </div>
           </div>
@@ -91,6 +91,16 @@
   /* For IE10 */
   select::-ms-expand {
     display: none;
+  }
+
+  .select__icon {
+    display: block;
+    position: absolute;
+    line-height: 1.25;
+    color: #0070c9;
+    top: 7px;
+    right: 0;
+    font-size: 16px;
   }
 
   .icon:before {
