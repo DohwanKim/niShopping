@@ -9,6 +9,7 @@ import UserOrderView from '../views/user/OrderView.vue';
 import UserOrderDetailView from '../views/user/OrderDetailView.vue';
 import AuthService from '../service/AuthService';
 import DetailProductView from '../views/product/DetailProductView.vue';
+import QnaBoardView from '../views/board/QnaBoardView.vue';
 
 Vue.use(VueRouter);
 
@@ -74,6 +75,14 @@ const routes = [
     name: 'DetailProductView',
     component: DetailProductView,
     props: true,
+    meta: {
+      requireAuth: false,
+    },
+  },
+  {
+    path: '/qnaboard',
+    name: 'QnaBoardView',
+    component: QnaBoardView,
     meta: {
       requireAuth: true,
     },
