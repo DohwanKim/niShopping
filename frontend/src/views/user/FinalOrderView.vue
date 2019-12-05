@@ -60,10 +60,10 @@
           <div class="main__shipment border-b border-t">
             <div class="flex">
               <div class="w-1/4">
-                <div class="text-center text-xl font-semibold">배송</div>
+                <div class="text-center text-xl font-semibold">배송 정보</div>
               </div>
               <div class="w-3/4 flex content-center flex-wrap">
-                <div class="w-full main__detail--deliver text-sm">
+                <div class="w-full main__detail--deliver">
                   <div class="flex">
                     <div>
                       {이름}
@@ -79,13 +79,12 @@
                       배송지
                     </div>
                     <div class="w-1/6 text-right">
-                      <button class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
+                      <button @click="changeAddress" class="text-sm font-normal text-appleBlue bg-transparent border-0 p-0 hover:underline">
                         <span>배송 정보 수정</span>
                       </button>
                     </div>
-
                   </div>
-                  <div class="flex flex-wrap">
+                  <div v-if="addressModifiedCheck" class="flex flex-wrap">
                     <div class="w-full">
                       {우편 번호}
                     </div>
@@ -103,17 +102,43 @@
           <div class="border-b">
             <div class="main__payment flex">
               <div class="w-1/4">
-                <div class="text-center text-lg font-semibold">지불 방식 선택</div>
+                <div class="text-center text-lg font-semibold">
+                  지불 방식 선택
+                </div>
+                <div class="flex flex-wrap text-center">
+                  <div class="w-full my-2">
+                    <input type="radio" id="card" value="Card" v-model="paymentSelect">
+                    <label for="card"> 카드 결제</label>
+                  </div>
+                  <div class="w-full">
+                    <input type="radio" id="account" value="Account" v-model="paymentSelect">
+                    <label for="account"> 계좌 이체</label>
+                  </div>
+                  <div class="w-full my-2">
+                    <input type="radio" id="pay" value="Pay" v-model="paymentSelect">
+                    <label for="pay"> 페이 결제</label>
+                  </div>
+                </div>
               </div>
               <div class="w-3/4 flex content-center flex-wrap">
-                <div class="w-full">
+                <div class="w-full" v-if="paymentSelect === 'Card'">
                   <div class="flex">
-                    <div class="w-1/2">
-                      결제수단
-                    </div>
-                    <div class="w-1/2 text-right">
-                      {카카오뱅크} : {1111-****-****-****}
-                    </div>
+                    카드 결제 내용
+                  </div>
+                </div>
+                <div class="w-full" v-if="paymentSelect === 'Account'">
+                  <div class="flex">
+                    계좌 이체 내용
+                  </div>
+                </div>
+                <div class="w-full" v-if="paymentSelect === 'Pay'">
+                  <div class="flex">
+                    페이 결제 내용
+                  </div>
+                </div>
+                <div class="w-full" v-if="paymentSelect === ''">
+                  <div class="flex">
+                    결제를 선택하세요.
                   </div>
                 </div>
               </div>
@@ -132,12 +157,8 @@
                 <div class="w-1/2">배송비</div>
                 <div class="w-1/2 text-right">+{사달라}</div>
               </div>
-              <div class="flex my-2">
-                <div class="w-1/2">소계</div>
-                <div class="w-1/2 text-right">사달라</div>
-              </div>
               <div class="flex my-2 border-b pb-6">
-                <div class="w-1/2">배송비</div>
+                <div class="w-1/2">소계</div>
                 <div class="w-1/2 text-right">사달라</div>
               </div>
               <div class="flex my-2 text-appleBlack-2 text-xl font-semibold">
@@ -167,6 +188,7 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
+import index from '@/store';
 
 @Component({
   components: {
@@ -175,7 +197,43 @@ import Footer from '../../components/Footer.vue';
   },
 })
 export default class FinalOrderView extends Vue {
+  addressModified: boolean = false;
 
+  paymentSelect: String = '';
+
+  orderProducts: [
+    {
+      name: '',
+    },
+  ];
+
+  orderAddress = {
+    name: '',
+    PhoneNumber: '',
+    postNumber: '',
+    FirstAddress: '',
+    LastAddress: '',
+  };
+
+  get selectPayment() {
+    if (this.paymentSelect === 'Card') {
+
+    } else if (this.paymentSelect === 'Account') {
+
+    } else if (this.paymentSelect === 'Pay') {
+
+    } else {
+      return false;
+    }
+  }
+
+  get addressModifiedCheck() {
+    return !this.addressModified;
+  }
+
+  changeAddress() {
+    this.addressModified = !this.addressModified;
+  }
 }
 </script>
 
@@ -194,8 +252,8 @@ export default class FinalOrderView extends Vue {
     min-width: 100%;
   }
   .main__shipment {
-    padding: 20px 0 20px 0;
-    height: 200px;
+    padding: 20px 0 40px 0;
+    height: 220px;
     margin-bottom: 20px;
   }
   .main__shipment--address {
