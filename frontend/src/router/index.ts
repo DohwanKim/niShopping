@@ -7,6 +7,7 @@ import UserCartView from '../views/user/CartView.vue';
 import UserLikeView from '../views/user/LikeView.vue';
 import UserOrderView from '../views/user/OrderView.vue';
 import UserOrderDetailView from '../views/user/OrderDetailView.vue';
+import FinalOrderView from '../views/user/FinalOrderView.vue';
 import AuthService from '../service/AuthService';
 import DetailProductView from '../views/product/DetailProductView.vue';
 import QnaBoardView from '../views/board/QnaBoardView.vue';
@@ -66,6 +67,14 @@ const routes = [
     path: '/myinfo/order/detail',
     name: 'UserOrderDetailView',
     component: UserOrderDetailView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/myinfo/finalorder',
+    name: 'FinalOrdrerView',
+    component: FinalOrderView,
     meta: {
       requireAuth: true,
     },
