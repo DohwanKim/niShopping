@@ -126,17 +126,17 @@
                     카드 결제 내용
                   </div>
                 </div>
-                <div class="w-full" v-if="paymentSelect === 'Account'">
+                <div class="w-full" v-else-if="paymentSelect === 'Account'">
                   <div class="flex">
                     계좌 이체 내용
                   </div>
                 </div>
-                <div class="w-full" v-if="paymentSelect === 'Pay'">
+                <div class="w-full" v-else-if="paymentSelect === 'Pay'">
                   <div class="flex">
                     페이 결제 내용
                   </div>
                 </div>
-                <div class="w-full" v-if="paymentSelect === ''">
+                <div class="w-full" v-else>
                   <div class="flex">
                     결제를 선택하세요.
                   </div>
@@ -188,7 +188,7 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
-import index from '@/store';
+import { productType } from '../../types/product';
 
 @Component({
   components: {
@@ -199,14 +199,9 @@ import index from '@/store';
 export default class FinalOrderView extends Vue {
   addressModified: boolean = false;
 
-  paymentSelect: String = '';
+  products: productType[] | object = {};
 
-  orderProducts: [
-    {
-      name: '',
-    },
-  ];
-
+  //TODO: Need orderAddress Type and Order DB. Also need OrderData, OrderPage for admin.
   orderAddress = {
     name: '',
     PhoneNumber: '',
@@ -214,18 +209,6 @@ export default class FinalOrderView extends Vue {
     FirstAddress: '',
     LastAddress: '',
   };
-
-  get selectPayment() {
-    if (this.paymentSelect === 'Card') {
-
-    } else if (this.paymentSelect === 'Account') {
-
-    } else if (this.paymentSelect === 'Pay') {
-
-    } else {
-      return false;
-    }
-  }
 
   get addressModifiedCheck() {
     return !this.addressModified;
