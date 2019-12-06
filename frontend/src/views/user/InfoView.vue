@@ -59,26 +59,26 @@
               이메일(아이디)
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              {{ userInfo.userEmail }}
+              {{ userInfo.email }}
             </div>
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
               이름
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              {{ userInfo.userName }}
+              {{ userInfo.name }}
             </div>
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
               닉네임
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              {{ userInfo.userNick }}
+              {{ userInfo.nickName }}
             </div>
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
               주소
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
               <div v-if="modifiedOff">
-                {{ userInfo.userAddress }}
+                {{ userInfo.address }}
               </div>
               <div v-if="modifiedOn">
                 <label>
@@ -91,7 +91,7 @@
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
               <div v-if="modifiedOff">
-                {{ userInfo.userPhoneNumber }}
+                {{ userInfo.phoneNumber }}
               </div>
               <div v-if="modifiedOn">
                 <label>
@@ -117,7 +117,9 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
+import userService from '../../service/userService';
 import AuthService from '../../service/AuthService';
+import { userType } from '../../types/user';
 
 @Component({
   components: {
@@ -132,13 +134,21 @@ export default class InfoView extends Vue {
 
   alertCancelStatus: boolean = false;
 
-  userInfo = {
-    userEmail: '',
-    userName: '',
-    userNick: '',
+  private userInfo: userType = {
+    id: 0,
+    userId: '',
+    name: '',
+    nickName: '',
     userImage: '',
-    userAddress: '',
-    userPhoneNumber: '',
+    gender: 0,
+    address: '',
+    birthDate: '',
+    phoneNumber: '',
+    phoneNumberVerified: 0,
+    email: '',
+    emailVerify: 0,
+    registerDate: '',
+    lastLoggedIn: '',
   };
 
   changeInfo = {
@@ -149,12 +159,12 @@ export default class InfoView extends Vue {
   created() {
     new AuthService().getUser().then((res) => {
       if (res) {
-        this.userInfo.userEmail = res.profile.email;
-        this.userInfo.userName = res.profile.name;
-        this.userInfo.userNick = res.profile.nickname;
+        this.userInfo.email = res.profile.email;
+        this.userInfo.name = res.profile.name;
+        this.userInfo.nickName = res.profile.nickname;
         this.userInfo.userImage = res.profile.picture;
-        this.userInfo.userAddress = res.profile.address;
-        this.userInfo.userPhoneNumber = res.profile.phoneNumber;
+        this.userInfo.address = res.profile.address;
+        this.userInfo.phoneNumber = res.profile.phoneNumber;
       }
     });
   }
@@ -167,14 +177,15 @@ export default class InfoView extends Vue {
     return this.modified;
   }
 
-  changeModified() :void{
+  async changeModified() :void{
     if (!this.modified) {
       this.modified = true;
     } else if (this.changeInfo.inputAddress === '' || this.changeInfo.inputPhoneNumber === '') {
       alert('입력되지 않은 정보가 있습니다.');
     } else {
-      this.userInfo.userAddress = this.changeInfo.inputAddress;
-      this.userInfo.userPhoneNumber = this.changeInfo.inputPhoneNumber;
+      this.userInfo.address = this.changeInfo.inputAddress;
+      this.userInfo.phoneNumber = this.changeInfo.inputPhoneNumber;
+      await userService.updateUserInfo(this.userInfo);
       this.clearModifiedData();
       this.toastSuccess();
       this.modified = false;
