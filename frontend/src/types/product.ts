@@ -1,19 +1,20 @@
 export interface productType {
   id: number;
+  pid: number;
   name: string;
   price: number;
   salesRate?: number;
   promotion?: string;
   seller: string;
-  image: string;
+  image?: string;
   stock: number;
-  summary: string;
   score?: number;
-  release?: string;
-  translator: string;
+  release: string;
+  translator?: string;
   author: string;
   publisher: string;
-  size: string;
-  weight: string;
-  pages: number;
+  summary?: string;
+  size?: string;
+  weight?: string;
+  pages?: number;
 }
