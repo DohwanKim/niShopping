@@ -191,7 +191,6 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import { productType } from '../../types/product';
-import ApiService from '../../service/apiService';
 
 @Component({
   components: {
@@ -204,8 +203,6 @@ export default class DetailProductView extends Vue {
   isClickLocalNav:boolean= false;
 
   private productInfo: productType | object = {};
-
-  private apiService = new ApiService();
 
   @Watch('productId', { immediate: true })
   getProductInfo(): void {
