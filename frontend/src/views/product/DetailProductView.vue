@@ -189,14 +189,21 @@ import {
   Watch,
   Vue,
 } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 import NavBar from '../../components/NavBar.vue';
 import { productType } from '../../types/product';
-import ApiService from '../../service/apiService';
+import * as productService from '../../service/productService';
 
 @Component({
   components: {
     NavBar,
   },
+  computed: mapActions([
+    'setCartInfo',
+    'addCartInfo',
+    'clearProductInfoInCart',
+    'deleteProductInfoInCart',
+  ]),
 })
 export default class DetailProductView extends Vue {
   @Prop(String) readonly productId: string | undefined;
@@ -205,18 +212,10 @@ export default class DetailProductView extends Vue {
 
   private productInfo: productType | object = {};
 
-  private apiService = new ApiService();
-
   @Watch('productId', { immediate: true })
-  getProductInfo(): void {
+  getProductInfo(oldValue: string | undefined, newValue: string | undefined) {
     console.log('productId', this.productId);
-    this.productInfo = {};
-
-
-    /* call api through mapActions method to get only one product info */
-    // this.apiService.defaultGet(`/findOneProductInfo?${this.productId}`).then((proInfo) => {
-    //   this.productInfo = proInfo;
-    // });
+    this.productInfo = productService.findById(this.productId);
 
     /* test data */
     this.productInfo = {
@@ -245,6 +244,7 @@ export default class DetailProductView extends Vue {
     /*
     * login check -> userInfo의 cart에 productId 추가
     */
+    this.addMyCart(this.productInfo);
   }
 
   addMyLike(): void {

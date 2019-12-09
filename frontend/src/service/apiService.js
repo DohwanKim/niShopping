@@ -23,6 +23,17 @@ const defaultGet = async (api) => {
     })
 };
 
+const defaultPost = async (api, data) => {
+  await defineHeaderAxios();
+  return axios
+    .post(baseUrl + api, data)
+    .then(response => response.data)
+    .catch(err => {
+      console.log(err);
+    })
+}
+
 export {
-  defaultGet
+  defaultGet,
+  defaultPost
 }
