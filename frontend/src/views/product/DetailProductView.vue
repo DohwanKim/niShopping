@@ -147,24 +147,24 @@
                       </div>
                     </li>
                     <li class="pt-5 p-0 m-0 ">
-                      <form id="addCart" method="post" action="" class="m-0 p-0 ">
+                      <div id="addCart" class="m-0 p-0 ">
                         <div class="w-full table">
                           <div class="table-cell">
                             <span>
-                              <button @click.prevent="addMyCart" type="submit" title="장바구니에 담기" class="main__cart_button hover:bg-blue-600">
+                              <button @click="addMyCart" title="장바구니에 담기" class="main__cart_button hover:bg-blue-600">
                                 <span>장바구니에 담기</span>
                               </button>
                             </span>
                           </div>
                           <div class="w-10 table-cell align-middle">
                             <div class="favorite float-right right-0 relative inline-block">
-                              <button @click.prevent="addMyLike" class="main__like_button" aria-label="즐겨찾기에 추가" tabindex="0">
+                              <button @click="addMyLike" class="main__like_button" aria-label="즐겨찾기에 추가" tabindex="0">
                                 <span class="far fa-heart absolute overflow-hidden w-6 h-6 p-0 -mt-3">즐겨찾기에 추가</span>
                               </button>
                             </div>
                           </div>
                         </div>
-                      </form>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -206,15 +206,18 @@ import * as productService from '../../service/productService';
   ]),
 })
 export default class DetailProductView extends Vue {
-  @Prop(String) readonly productId: string | undefined;
+  @Prop({ default: '', required: true })
+  readonly productId!: string;
 
   isClickLocalNav:boolean= false;
 
   private productInfo: productType | object = {};
 
   @Watch('productId', { immediate: true })
-  getProductInfo(oldValue: string | undefined, newValue: string | undefined) {
-    console.log('productId', this.productId);
+  getProductInfo(newValue: string, oldValue: string) {
+    // console.log('productId', this.productId);
+    console.log('oldValue', oldValue);
+    console.log('newValue', newValue);
     this.productInfo = productService.findById(this.productId);
 
     /* test data */
@@ -244,7 +247,7 @@ export default class DetailProductView extends Vue {
     /*
     * login check -> userInfo의 cart에 productId 추가
     */
-    this.addMyCart(this.productInfo);
+    // this.addMyCart(this.productInfo);
   }
 
   addMyLike(): void {
