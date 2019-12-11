@@ -5,13 +5,13 @@
     </div>
     <div class="main">
       <transition name="fade">
-        <div v-if="alertSuccessStatus" class="v-leave-active main__alert opacity-75 absolute bg-blue-100 border-t border-b border-blue-500 text-blue-800 px-4 py-3" role="alert">
+        <div v-if="statusData.alertSuccessStatus" class="v-leave-active main__alert opacity-75 absolute bg-blue-100 border-t border-b border-blue-500 text-blue-800 px-4 py-3" role="alert">
           <p class="font-bold">수정 완료</p>
           <p class="text-sm">입력하신 정보로 수정되었습니다.</p>
         </div>
       </transition>
       <transition name="fade">
-        <div v-if="alertCancelStatus" role="alert" class="v-leave-active main__alert opacity-75 absolute">
+        <div v-if="statusData.alertCancelStatus" role="alert" class="v-leave-active main__alert opacity-75 absolute">
           <div class="bg-red-700 text-white font-bold rounded-t px-4 py-2">
             수정 취소
           </div>
@@ -118,7 +118,6 @@ import {
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
 import userService from '../../service/userService';
-import AuthService from '../../service/AuthService';
 import { userType } from '../../types/user';
 
 @Component({
@@ -128,11 +127,11 @@ import { userType } from '../../types/user';
   },
 })
 export default class InfoView extends Vue {
-  modified: boolean = false;
-
-  alertSuccessStatus: boolean = false;
-
-  alertCancelStatus: boolean = false;
+  private statusData = {
+    modified: false,
+    alertSuccessStatus: false,
+    alertCancelStatus: false,
+  };
 
   private userInfo: userType = {
     id: 0,
@@ -147,6 +146,7 @@ export default class InfoView extends Vue {
     phoneNumberVerified: 0,
     email: '',
     emailVerify: 0,
+    isFirstLogin: 0,
     registerDate: '',
     lastLoggedIn: '',
   };
@@ -157,29 +157,20 @@ export default class InfoView extends Vue {
   };
 
   created() {
-    new AuthService().getUser().then((res) => {
-      if (res) {
-        this.userInfo.email = res.profile.email;
-        this.userInfo.name = res.profile.name;
-        this.userInfo.nickName = res.profile.nickname;
-        this.userInfo.userImage = res.profile.picture;
-        this.userInfo.address = res.profile.address;
-        this.userInfo.phoneNumber = res.profile.phoneNumber;
-      }
-    });
+    this.userInfo = userService.getUserInfo();
   }
 
   get modifiedOff() {
-    return !this.modified;
+    return !this.statusData.modified;
   }
 
   get modifiedOn() {
-    return this.modified;
+    return this.statusData.modified;
   }
 
   async changeModified() :void{
-    if (!this.modified) {
-      this.modified = true;
+    if (!this.statusData.modified) {
+      this.statusData.modified = true;
     } else if (this.changeInfo.inputAddress === '' || this.changeInfo.inputPhoneNumber === '') {
       alert('입력되지 않은 정보가 있습니다.');
     } else {
@@ -188,14 +179,14 @@ export default class InfoView extends Vue {
       await userService.updateUserInfo(this.userInfo);
       this.clearModifiedData();
       this.toastSuccess();
-      this.modified = false;
+      this.statusData.modified = false;
     }
   }
 
   cancelModified() :void{
     this.clearModifiedData();
     this.toastCancel();
-    this.modified = false;
+    this.statusData.modified = false;
   }
 
   clearModifiedData() :void{
@@ -204,16 +195,16 @@ export default class InfoView extends Vue {
   }
 
   toastSuccess() :void{
-    this.alertSuccessStatus = true;
+    this.statusData.alertSuccessStatus = true;
     setTimeout(() => {
-      this.alertSuccessStatus = false;
+      this.statusData.alertSuccessStatus = false;
     }, 3000);
   }
 
   toastCancel() :void{
-    this.alertCancelStatus = true;
+    this.statusData.alertCancelStatus = true;
     setTimeout(() => {
-      this.alertCancelStatus = false;
+      this.statusData.alertCancelStatus = false;
     }, 3000);
   }
 }
