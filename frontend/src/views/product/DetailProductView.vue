@@ -211,33 +211,35 @@ export default class DetailProductView extends Vue {
 
   isClickLocalNav:boolean= false;
 
-  private productInfo: productType | object = {};
+  private productInfo!: productType;
 
   @Watch('productId', { immediate: true })
-  getProductInfo(newValue: string, oldValue: string) {
+  async getProductInfo(newValue: string, oldValue: string) {
     // console.log('productId', this.productId);
     console.log('oldValue', oldValue);
     console.log('newValue', newValue);
-    this.productInfo = productService.findById(this.productId);
+    this.productInfo = await productService.findById(this.productId);
 
     /* test data */
     this.productInfo = {
       id: 0,
-      name: 'TEST',
+      pid: 'pid',
+      name: 'Name',
       price: 39000,
       salesRate: 9.9,
-      promotion: 'test',
-      seller: 'test',
+      promotion: 'promotion',
+      seller: 'seller',
+      genre: 'genre',
       image: 'assets/img/testbook.jpg',
       stock: 213,
-      summary: 'test',
+      summary: 'summary',
       score: 4.5,
-      release: 'test',
-      translator: 'test',
-      author: 'test',
-      publisher: 'test',
-      size: 'test',
-      weight: 'test',
+      release: 'release',
+      translator: 'translator',
+      author: '작가',
+      publisher: '출판사',
+      size: '크기',
+      weight: '무게',
       pages: 213,
     };
     console.log('productInfo ', this.productInfo);
