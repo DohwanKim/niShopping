@@ -1,6 +1,7 @@
 module.exports = {
   theme: {
     inset: {
+      '1/2': '50%',
       '1/12': '8.333333%',
       '-9999px': '-9999px',
       '-46px': '-46px',
@@ -90,6 +91,7 @@ module.exports = {
         '3/4': '75%',
         '3/5': '60%',
         'lg': '1023px',
+        '480px': '480px',
         '980px': '980px',
       },
       minWidth: {
@@ -107,6 +109,7 @@ module.exports = {
       },
       fontSize: {
         '3.5xl': '2rem',
+        '4.5xl': '2.5rem',
       },
     },
   },
