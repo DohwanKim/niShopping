@@ -211,7 +211,7 @@ export default class DetailProductView extends Vue {
 
   isClickLocalNav:boolean= false;
 
-  private productInfo!: productType;
+  private productInfo: productType | null = null;
 
   @Watch('productId', { immediate: true })
   async getProductInfo(newValue: string, oldValue: string) {
@@ -242,7 +242,6 @@ export default class DetailProductView extends Vue {
       weight: '무게',
       pages: 213,
     };
-    console.log('productInfo ', this.productInfo);
   }
 
   addMyCart(): void {
