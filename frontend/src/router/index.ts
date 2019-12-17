@@ -12,6 +12,7 @@ import AuthService from '../service/AuthService';
 import DetailProductView from '../views/product/DetailProductView.vue';
 import QnaBoardView from '../views/board/QnaBoardView.vue';
 import WriteBoardView from '../views/board/WriteBoardView.vue';
+import EditProductView from '../views/product/EditProductView.vue';
 
 Vue.use(VueRouter);
 
@@ -101,6 +102,14 @@ const routes = [
     path: '/qnaboard/write',
     name: 'WriteBoardView',
     component: WriteBoardView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/editproduct',
+    name: 'EditProductView',
+    component: EditProductView,
     meta: {
       requireAuth: true,
     },
