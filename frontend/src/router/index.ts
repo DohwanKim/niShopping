@@ -11,6 +11,7 @@ import FinalOrderView from '../views/user/FinalOrderView.vue';
 import AuthService from '../service/AuthService';
 import DetailProductView from '../views/product/DetailProductView.vue';
 import QnaBoardView from '../views/board/QnaBoardView.vue';
+import WriteBoardView from '../views/board/WriteBoardView.vue';
 
 Vue.use(VueRouter);
 
@@ -92,6 +93,14 @@ const routes = [
     path: '/qnaboard',
     name: 'QnaBoardView',
     component: QnaBoardView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/qnaboard/write',
+    name: 'WriteBoardView',
+    component: WriteBoardView,
     meta: {
       requireAuth: true,
     },
