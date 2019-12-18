@@ -21,6 +21,7 @@ const state: stateType = {
     phoneNumberVerified: 1,
     email: 'email',
     emailVerify: 1,
+    isFirstLogin: 0,
     registerDate: 'registerdate',
     lastLoggedIn: 'lastloggedin',
   },
