@@ -10,6 +10,10 @@ const getCart = async (uid: string, pid: string, quantity: number) => {
   return defaultGet('/cart/get', { uid, pid, quantity });
 };
 
+const getCartByUid = async (uid: string) => {
+  return defaultGet('/cart/get/uid', { uid });
+}
+
 const clearCart = async (uid: string) => {
   return defaultGet('/cart/clear', { uid });
 };
