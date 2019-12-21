@@ -101,7 +101,6 @@
             </div>
           </div>
         </section>
-
       </div>
     </div>
     <div class="footer">
@@ -174,8 +173,8 @@ export default class InfoView extends Vue {
     } else if (this.changeInfo.inputAddress === '' || this.changeInfo.inputPhoneNumber === '') {
       alert('입력되지 않은 정보가 있습니다.');
     } else {
-      this.userInfo.address = this.changeInfo.inputAddress;
-      this.userInfo.phoneNumber = this.changeInfo.inputPhoneNumber;
+      this.userInfo.address = await this.changeInfo.inputAddress;
+      this.userInfo.phoneNumber = await this.changeInfo.inputPhoneNumber;
       await userService.updateUserInfo(this.userInfo);
       this.clearModifiedData();
       this.toastSuccess();
