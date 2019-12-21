@@ -9,6 +9,7 @@ import UserOrderView from '../views/user/OrderView.vue';
 import UserOrderDetailView from '../views/user/OrderDetailView.vue';
 import FinalOrderView from '../views/user/FinalOrderView.vue';
 import AuthService from '../service/AuthService';
+import ProductView from '../views/product/ProductView.vue';
 import DetailProductView from '../views/product/DetailProductView.vue';
 import QnaBoardView from '../views/board/QnaBoardView.vue';
 import WriteBoardView from '../views/board/WriteBoardView.vue';
@@ -79,6 +80,14 @@ const routes = [
     component: FinalOrderView,
     meta: {
       requireAuth: true,
+    },
+  },
+  {
+    path: '/product',
+    name: 'ProductView',
+    component: ProductView,
+    meta: {
+      requireAuth: false,
     },
   },
   {
