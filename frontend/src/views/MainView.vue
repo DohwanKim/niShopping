@@ -6,9 +6,7 @@
 
     <div class="main bg-gray-300">
       <section class="main__banner">
-        <div>
-          <img class="main__banner--img">
-        </div>
+        <img src="../assets/banner-img/main-banner.png" class="main__banner--img"></img>
       </section>
 
       <section class="main__product">
@@ -39,7 +37,7 @@
                 <Card />
               </div>
             </div>
-            
+
           </div>
         </div>
       </section>
@@ -89,12 +87,15 @@ export default class MainView extends Vue {
   }
   .main__banner {
     margin-bottom: 40px;
+    height: 500px;
   }
   .main__banner--img {
     object-fit: cover;
-    width: 100%;
-    max-height: 500px;
-    content:url("https://images.wallpaperscraft.com/image/book_table_sheets_pages_light_44458_1920x1080.jpg");
+    width: 100vw;
+    min-width: 1024px;
+    height: 40vw;
+    min-height: 100%;
+    max-height: 100%;
   }
   .main__product {
     text-align: center;
