@@ -47,152 +47,35 @@
               </div>
             </div>
           </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.seller" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">판매자</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <EditForm :name="'seller'" @seller="enteredProductInfo['seller'] = $event" />
         </div>
       </div>
       <div class="main__section">
         <div class="m-auto max-w-480px">
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.stock" type="number" class="main__txt_box" min="0" step="1" required>
-                  <span class="main__txt_box_label">재고</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.release" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">출판일</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.author" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">작가</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <EditForm :name="'stock'" @stock="enteredProductInfo['stock'] = $event" />
+          <EditForm :name="'release'" @release="enteredProductInfo['release'] = $event" />
+          <EditForm :name="'author'" @author="enteredProductInfo['author'] = $event" />
         </div>
       </div>
       <div class="main__section">
         <div class="m-auto max-w-480px">
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.publisher" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">출판사</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.salesRate" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">할인율</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.promotion" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">프로모션</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <EditForm :name="'publisher'" @publisher="enteredProductInfo['publisher'] = $event" />
+          <EditForm :name="'salesRate'" @salesRate="enteredProductInfo['salesRate'] = $event" />
+          <EditForm :name="'promotion'" @promotion="enteredProductInfo['promotion'] = $event" />
         </div>
       </div>
       <div class="main__section">
         <div class="m-auto max-w-480px">
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.image" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">제품 이미지</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.translator" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">번역가</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.summary" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">개요</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <EditForm :name="'image'" @image="enteredProductInfo['image'] = $event"/>
+          <EditForm :name="'translator'" @translator="enteredProductInfo['translator'] = $event"/>
+          <EditForm :name="'summary'" @summary="enteredProductInfo['summary'] = $event" />
         </div>
       </div>
       <div class="main__section">
         <div class="m-auto max-w-480px">
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.size" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">사이즈</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.weight" type="text" class="main__txt_box" required>
-                  <span class="main__txt_box_label">무게</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="main__row">
-            <div class="main__col">
-              <div class="w-full relative overflow-visible">
-                <div class="relative">
-                  <input v-model="enteredProductInfo.pages" type="number" class="main__txt_box" min="0" step="1" required>
-                  <span class="main__txt_box_label">페이지수</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <EditForm :name="'size'" @size="enteredProductInfo['size'] = $event" />
+          <EditForm :name="'weight'" @weight="enteredProductInfo['weight'] = $event" />
+          <EditForm :name="'pages'" @pages="enteredProductInfo['pages'] = $event" />
         </div>
       </div>
       <button @click.prevent="productRegistration" type="submit" title="제출" class="tmp_button hover:bg-blue-600">
@@ -208,11 +91,13 @@ import {
   Component,
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
+import EditForm from '../../components/EditForm.vue';
 // import * as productService from '../../service/productService';
 
 @Component({
   components: {
     NavBar,
+    EditForm,
   },
 })
 export default class EditProductView extends Vue {
@@ -229,68 +114,16 @@ export default class EditProductView extends Vue {
   productRegistration(): void {
     // productService.createProduct(this.enteredProductInfo);
   }
+
+  modifyProductInfo(): void{
+
+  }
 }
 </script>
 
 <style lang="scss" scoped>
   @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css');
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type=number] {
-    -moz-appearance:textfield;
-  }
-
-  @mixin focus_input_box {
-    border-color: #0070c9;
-    outline: none;
-    box-shadow: 0 0 0 .25rem rgba(131,192,253,.5);
-  }
-
-  @mixin txt_box {
-    letter-spacing: 0;
-    font-size: 1.125rem;
-    line-height: 1.23543;
-    font-weight: 400;
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    height: 3.3em;
-    margin: 0 0 .875rem 0;
-    padding: 1.125rem 1rem 0 1rem;
-    color: #333333;
-    text-align: left;
-    border: 1px solid #d6d6d6;
-    border-radius: 4px;
-    background: hsla(0,0%,100%,.8);
-    background-clip: padding-box;
-  }
-
-  @mixin txt_box_label {
-    position: absolute;
-    top: 1.125rem;
-    left: 1.125rem;
-    color: #888;
-    padding: 0;
-    letter-spacing: 0;
-    font-size: 1.125rem;
-    line-height: 1.23543;
-    font-weight: 400;
-    display: block;
-    vertical-align: top;
-    pointer-events: none;
-  }
-
-  @mixin txt_box_label_focus {
-    font-size: .75rem;
-    line-height: 1.75;
-    top: .5rem;
-    color: #666666;
-  }
+  @import '../../assets/css/edit.scss';
 
   .header__title {
     text-align: center;
@@ -396,7 +229,7 @@ export default class EditProductView extends Vue {
             height: 3.3em;
             color: #333;
             text-align: left;
-            background: hsla(0,0%,100%,.8);
+            background: hsla(0, 0%, 100%, .8);
             border: 1px solid #d6d6d6;
             border-radius: 4px;
             background-clip: padding-box;
@@ -422,22 +255,6 @@ export default class EditProductView extends Vue {
             display: inline-block;
             line-height: 1;
             position: relative;
-          }
-
-          .main__txt_box {
-            @include txt_box;
-            &:focus {
-              @include focus_input_box;
-            }
-          }
-
-          .main__txt_box_label {
-            @include txt_box_label;
-          }
-
-          .main__txt_box:focus ~ .main__txt_box_label,
-          .main__txt_box:not(focus):valid ~ .main__txt_box_label {
-            @include txt_box_label_focus;
           }
         }
       }

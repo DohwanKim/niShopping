@@ -168,7 +168,7 @@ export default class InfoView extends Vue {
     return this.statusData.modified;
   }
 
-  async changeModified() :void{
+  async changeModified() {
     if (!this.statusData.modified) {
       this.statusData.modified = true;
     } else if (this.changeInfo.inputAddress === '' || this.changeInfo.inputPhoneNumber === '') {
