@@ -34,6 +34,7 @@ module.exports = {
     },
     lineHeight: {
       none: 1,
+      moreTight: 1.1,
       tight: 1.25,
       snug: 1.375,
       normal: 1.5,
@@ -57,12 +58,15 @@ module.exports = {
         orange: '#e85d00',
       },
       spacing: {
+        '2px': '2px',
+        '3px': '3px',
         '4px': '4px',
         '6px': '6px',
         '8px': '8px',
         '10px': '10px',
         '12px': '12px',
         '15px': '15px',
+        '20px': '20px',
         '30px': '30px',
         '35px': '35px',
         '36px': '36px',
@@ -109,6 +113,7 @@ module.exports = {
         183: '45.75rem',
       },
       fontSize: {
+        '1em': '1em',
         '3.5xl': '2rem',
         '4.5xl': '2.5rem',
       },
