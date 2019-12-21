@@ -37,5 +37,5 @@ public class Product {
     private String publisher;
     private String summary;
     private String size;
-    private Float weight;
+    private int weight;
 }

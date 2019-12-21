@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @GetMapping(value="/find", params="pid")
-    public Product findByPid(@PathVariable long pid) {
+    public Product findByPid(@PathVariable String pid) {
         return productService.getProductByPid(pid);
     }
 

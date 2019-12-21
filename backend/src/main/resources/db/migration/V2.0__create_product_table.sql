@@ -17,7 +17,7 @@ CREATE TABLE product
     publisher    VARCHAR(100)           NOT NULL,
     summary      VARCHAR(256),
     size         VARCHAR(100),
-    weight       FLOAT(20),
+    weight       TINYINT(20),
     PRIMARY KEY (id),
     UNIQUE KEY (pid)
 )

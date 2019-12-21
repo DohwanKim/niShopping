@@ -24,7 +24,7 @@
         publisher,
         summary,
         size,
-        weight,
+        weight
     </sql>
     <sql id="updateColumns">
         `pid` = #{pid},
@@ -33,7 +33,7 @@
         `sales_rate` = #{salesRate},
         `promotion` = #{promotion},
         `seller` = #{seller},
-        `genre` = #{genere},
+        `genre` = #{genre},
         `image` = #{image},
         `stock` = #{stock},
         `score` = #{score},
@@ -43,12 +43,11 @@
         `publisher` = #{publisher},
         `summary` = #{summary},
         `size` = #{size},
-        `weight` = #{weight},
+        `weight` = #{weight}
     </sql>
     <insert id="create" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO `product`
-        SET
-        <include refid="updateColumns" />
+        SET <include refid="updateColumns" />
     </insert>
     <select id="findAll" resultMap="entity">
         SELECT *
@@ -67,6 +66,6 @@
     <update id="updateProduct">
         UPDATE `product`
         SET <include refid="updateColumns" />
-        WHERE user_id = #{pid}
+        WHERE pid = #{pid}
     </update>
 </mapper>

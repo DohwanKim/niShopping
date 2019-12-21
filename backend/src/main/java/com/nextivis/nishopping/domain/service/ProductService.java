@@ -27,7 +27,7 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProductByPid(long pid) {
+    public Product getProductByPid(String pid) {
         return productRepository.findByPid(pid);
     }
 
@@ -37,6 +37,6 @@ public class ProductService {
 
     public int updateProduct(Product product) {
         LocalDateTime localDateTime = LocalDateTime.now();
-        return productRepository.updateProduct(product, localDateTime);
+        return productRepository.updateProduct(product);
     }
 }

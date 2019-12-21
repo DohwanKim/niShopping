@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,10 +46,71 @@ public class ProductRepositoryTest {
                         rs.getString("publisher"),
                         rs.getString("summary"),
                         rs.getString("size"),
-                        rs.getFloat("weight")
+                        rs.getInt("weight")
                 ), expectProduct.getId());
 
         assertThat(actualProduct).isEqualTo(expectProduct);
+    }
+
+    @Test
+    public void findByPid() {
+        Product expectProduct = createProductBuilder("testPid");
+        target.create(expectProduct);
+        expectProduct.setReleaseDate(expectProduct.getReleaseDate().minusHours(9));
+
+        assertThat(target.findByPid(expectProduct.getPid())).isEqualTo(expectProduct);
+    }
+
+    @Test
+    public void findByGenre() {
+        String sameGenre = "sameGenre";
+        Product expectProduct1 = createProductBuilder("testPid1");
+        Product expectProduct2 = createProductBuilder("testPid2");
+        Product expectProduct3 = createProductBuilder("testPid3");
+
+        expectProduct1.setGenre(sameGenre);
+        expectProduct3.setGenre(sameGenre);
+
+        target.create(expectProduct1);
+        target.create(expectProduct2);
+        target.create(expectProduct3);
+
+        expectProduct1.setReleaseDate(expectProduct1.getReleaseDate().minusHours(9));
+        expectProduct2.setReleaseDate(expectProduct2.getReleaseDate().minusHours(9));
+        expectProduct3.setReleaseDate(expectProduct3.getReleaseDate().minusHours(9));
+
+        assertThat(target.findByGenre(sameGenre)).containsExactly(expectProduct1, expectProduct3);
+    }
+
+    @Test
+    public void findAll() {
+        Product expectProduct1 = createProductBuilder("testPid1");
+        Product expectProduct2 = createProductBuilder("testPid2");
+        Product expectProduct3 = createProductBuilder("testPid3");
+
+        target.create(expectProduct1);
+        target.create(expectProduct2);
+        target.create(expectProduct3);
+
+        expectProduct1.setReleaseDate(expectProduct1.getReleaseDate().minusHours(9));
+        expectProduct2.setReleaseDate(expectProduct2.getReleaseDate().minusHours(9));
+        expectProduct3.setReleaseDate(expectProduct3.getReleaseDate().minusHours(9));
+
+        assertThat(target.findAll()).containsExactly(expectProduct1, expectProduct2, expectProduct3);
+
+    }
+
+    @Test
+    public void updateProduct() {
+        Product expectProduct = createProductBuilder("testPid");
+        target.create(expectProduct);
+        expectProduct.setName("updateName");
+        expectProduct.setAuthor("updateAuthor");
+        target.updateProduct(expectProduct);
+
+        expectProduct.setReleaseDate(expectProduct.getReleaseDate().minusHours(9));
+
+        assertThat(target.findByPid(expectProduct.getPid())).isEqualTo(expectProduct);
     }
 
     public Product createProductBuilder(String pid) {
@@ -59,17 +121,17 @@ public class ProductRepositoryTest {
                 .salesRate(100)
                 .promotion("testPromotion")
                 .seller("testSeller")
-                .genre("testGenere")
+                .genre("testGenre")
                 .image("testImage")
                 .stock(100)
                 .score(123)
-                .releaseDate(LocalDateTime.now())
+                .releaseDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
                 .translator("testTranslator")
                 .author("testAuthor")
                 .publisher("testPublisher")
                 .summary("testSummary")
                 .size("100x100")
-                .weight(123f)
+                .weight(7)
                 .build();
     }
 }
