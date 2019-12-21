@@ -147,24 +147,24 @@
                       </div>
                     </li>
                     <li class="pt-5 p-0 m-0 ">
-                      <form id="addCart" method="post" action="" class="m-0 p-0 ">
+                      <div id="addCart" class="m-0 p-0 ">
                         <div class="w-full table">
                           <div class="table-cell">
                             <span>
-                              <button @click.prevent="addMyCart" type="submit" title="장바구니에 담기" class="main__cart_button hover:bg-blue-600">
+                              <button @click="addMyCart" title="장바구니에 담기" class="main__cart_button hover:bg-blue-600">
                                 <span>장바구니에 담기</span>
                               </button>
                             </span>
                           </div>
                           <div class="w-10 table-cell align-middle">
                             <div class="favorite float-right right-0 relative inline-block">
-                              <button @click.prevent="addMyLike" class="main__like_button" aria-label="즐겨찾기에 추가" tabindex="0">
+                              <button @click="addMyLike" class="main__like_button" aria-label="즐겨찾기에 추가" tabindex="0">
                                 <span class="far fa-heart absolute overflow-hidden w-6 h-6 p-0 -mt-3">즐겨찾기에 추가</span>
                               </button>
                             </div>
                           </div>
                         </div>
-                      </form>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -189,59 +189,66 @@ import {
   Watch,
   Vue,
 } from 'vue-property-decorator';
+import { mapActions } from 'vuex';
 import NavBar from '../../components/NavBar.vue';
 import { productType } from '../../types/product';
+import * as productService from '../../service/productService';
 
 @Component({
   components: {
     NavBar,
   },
+  computed: mapActions([
+    'setCartInfo',
+    'addCartInfo',
+    'clearProductInfoInCart',
+    'deleteProductInfoInCart',
+  ]),
 })
 export default class DetailProductView extends Vue {
-  @Prop(String) readonly productId: string | undefined;
+  @Prop({ default: '', required: true })
+  readonly productId!: string;
 
   isClickLocalNav:boolean= false;
 
-  private productInfo: productType | object = {};
+  private productInfo: productType | null = null;
 
   @Watch('productId', { immediate: true })
-  getProductInfo(): void {
-    console.log('productId', this.productId);
-    this.productInfo = {};
-
-
-    /* call api through mapActions method to get only one product info */
-    // this.apiService.defaultGet(`/findOneProductInfo?${this.productId}`).then((proInfo) => {
-    //   this.productInfo = proInfo;
-    // });
+  async getProductInfo(newValue: string, oldValue: string) {
+    // console.log('productId', this.productId);
+    console.log('oldValue', oldValue);
+    console.log('newValue', newValue);
+    this.productInfo = await productService.findById(this.productId);
 
     /* test data */
     this.productInfo = {
       id: 0,
-      name: 'TEST',
+      pid: 'pid',
+      name: 'Name',
       price: 39000,
       salesRate: 9.9,
-      promotion: 'test',
-      seller: 'test',
+      promotion: 'promotion',
+      seller: 'seller',
+      genre: 'genre',
       image: 'assets/img/testbook.jpg',
       stock: 213,
-      summary: 'test',
+      summary: 'summary',
       score: 4.5,
-      release: 'test',
-      translator: 'test',
-      author: 'test',
-      publisher: 'test',
-      size: 'test',
-      weight: 'test',
+      release: 'release',
+      translator: 'translator',
+      author: '작가',
+      publisher: '출판사',
+      size: '크기',
+      weight: '무게',
       pages: 213,
     };
-    console.log('productInfo ', this.productInfo);
   }
 
   addMyCart(): void {
     /*
     * login check -> userInfo의 cart에 productId 추가
     */
+    // this.addMyCart(this.productInfo);
   }
 
   addMyLike(): void {

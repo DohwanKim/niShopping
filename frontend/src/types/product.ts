@@ -1,11 +1,12 @@
 export interface productType {
   id: number;
-  pid: number;
+  pid: string;
   name: string;
   price: number;
   salesRate?: number;
   promotion?: string;
   seller: string;
+  genre: string;
   image?: string;
   stock: number;
   score?: number;
