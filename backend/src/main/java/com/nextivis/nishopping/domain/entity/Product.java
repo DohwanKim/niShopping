@@ -26,9 +26,7 @@ public class Product {
     private String image;
     @NotNull
     private int stock;
-    @Size(min = 0, max = 100)
     private Integer score;
-    @NotNull
     private LocalDateTime releaseDate;
     private String translator;
     @NotNull

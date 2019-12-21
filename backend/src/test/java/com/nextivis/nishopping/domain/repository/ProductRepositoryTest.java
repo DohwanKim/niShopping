@@ -25,7 +25,7 @@ public class ProductRepositoryTest {
 
     @Test
     public void create() {
-        Product expectProduct = createProductBuilder("testPid");
+        Product expectProduct = createProductEntity("testPid");
         target.create(expectProduct);
         Product actualProduct = jdbcTemplate.queryForObject("SELECT * FROM product WHERE id = ?",
                 (rs, rowNum) -> new Product(
@@ -48,13 +48,12 @@ public class ProductRepositoryTest {
                         rs.getString("size"),
                         rs.getInt("weight")
                 ), expectProduct.getId());
-
         assertThat(actualProduct).isEqualTo(expectProduct);
     }
 
     @Test
     public void findByPid() {
-        Product expectProduct = createProductBuilder("testPid");
+        Product expectProduct = createProductEntity("testPid");
         target.create(expectProduct);
         expectProduct.setReleaseDate(expectProduct.getReleaseDate().minusHours(9));
 
@@ -64,9 +63,9 @@ public class ProductRepositoryTest {
     @Test
     public void findByGenre() {
         String sameGenre = "sameGenre";
-        Product expectProduct1 = createProductBuilder("testPid1");
-        Product expectProduct2 = createProductBuilder("testPid2");
-        Product expectProduct3 = createProductBuilder("testPid3");
+        Product expectProduct1 = createProductEntity("testPid1");
+        Product expectProduct2 = createProductEntity("testPid2");
+        Product expectProduct3 = createProductEntity("testPid3");
 
         expectProduct1.setGenre(sameGenre);
         expectProduct3.setGenre(sameGenre);
@@ -84,9 +83,9 @@ public class ProductRepositoryTest {
 
     @Test
     public void findAll() {
-        Product expectProduct1 = createProductBuilder("testPid1");
-        Product expectProduct2 = createProductBuilder("testPid2");
-        Product expectProduct3 = createProductBuilder("testPid3");
+        Product expectProduct1 = createProductEntity("testPid1");
+        Product expectProduct2 = createProductEntity("testPid2");
+        Product expectProduct3 = createProductEntity("testPid3");
 
         target.create(expectProduct1);
         target.create(expectProduct2);
@@ -102,7 +101,7 @@ public class ProductRepositoryTest {
 
     @Test
     public void updateProduct() {
-        Product expectProduct = createProductBuilder("testPid");
+        Product expectProduct = createProductEntity("testPid");
         target.create(expectProduct);
         expectProduct.setName("updateName");
         expectProduct.setAuthor("updateAuthor");
@@ -113,7 +112,7 @@ public class ProductRepositoryTest {
         assertThat(target.findByPid(expectProduct.getPid())).isEqualTo(expectProduct);
     }
 
-    public Product createProductBuilder(String pid) {
+    public Product createProductEntity(String pid) {
         return Product.builder()
                 .pid(pid)
                 .name("testName")

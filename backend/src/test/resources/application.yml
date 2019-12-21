@@ -13,6 +13,8 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: https://dev-z1noh6-s.auth0.com/.well-known/jwks.json
+  http:
+    log-request-details: true
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

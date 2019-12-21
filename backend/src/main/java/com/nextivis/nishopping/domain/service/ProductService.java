@@ -36,7 +36,6 @@ public class ProductService {
     }
 
     public int updateProduct(Product product) {
-        LocalDateTime localDateTime = LocalDateTime.now();
         return productRepository.updateProduct(product);
     }
 }
