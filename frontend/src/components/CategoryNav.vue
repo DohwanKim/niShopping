@@ -1,12 +1,14 @@
 <template>
   <div class="category_nav">
-    <div class="px-35px pt-35px pb-0">
+    <div class="px-35px pt-30px pb-0">
       <ul class="m-0 p-0 list-none">
         <li class="m-0 p-0 relative" v-for="(subCatInfo, priCat) in categoryInfo" :key="priCat">
           <div class="border-b border-solid border-appleGray-400">
             <div class="px-8px pt-8px pb-10px">
               <button class="category_nav__primary_cat" tabindex="0" @click.prevent="subCatInfo['isOn'] = !subCatInfo['isOn']">
-                <span class="category_nav__primary_cat_title" v-text="priCat"></span>
+                <span class="category_nav__primary_cat_title">
+                  <span class="category_nav__pri_cat_txt" v-text="priCat"></span>
+                </span>
                 <span class="category_nav__icon--close fas fa-times"></span>
               </button>
             </div>
@@ -98,6 +100,7 @@ export default class CategoryNav extends Vue {
     padding: 0;
     float: left;
     color: #333;
+    text-align: left;
   }
 
   .category_nav__primary_cat {
@@ -113,9 +116,14 @@ export default class CategoryNav extends Vue {
   }
 
   .category_nav__primary_cat_title {
-    font-weight: 800;
     width: 100%;
     @include category_nav__primary_cat_common;
+  }
+
+  .category_nav__pri_cat_txt {
+    font-weight: 800;
+    display: inline-block;
+    width: 113px;
   }
 
   .category_nav__icon--close {

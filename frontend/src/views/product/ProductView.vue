@@ -43,9 +43,9 @@
 
         <section class="main__contents--middle flex justify-center">
           <div class="main__contents--middle_grid flex flex-row">
-            <div class="main__contents--nav">
-              카테고리 자리
-            </div>
+<!--            <div class="main__contents&#45;&#45;nav">-->
+              <CategoryNav />
+<!--            </div>-->
             <div class="main__contents--products flex flex-wrap">
               <div class="w-1/3 main__contents--products-grids border-b border-l">
                 상품 1
@@ -78,11 +78,13 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
+import CategoryNav from '../../components/CategoryNav.vue';
 
   @Component({
     components: {
       NavBar,
       Footer,
+      CategoryNav,
     },
   })
 export default class ProductView extends Vue {
