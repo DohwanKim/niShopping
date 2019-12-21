@@ -15,7 +15,7 @@ public class ProductController {
 
     // need admin role
     @PostMapping("/create")
-    public int create(Product product) {
+    public int create(@RequestParam Product product) {
         return productService.createProduct(product);
     }
 

@@ -25,7 +25,6 @@ public class ProductRepositoryTest {
     @Test
     public void create() {
         Product expectProduct = createProductBuilder("testPid");
-
         target.create(expectProduct);
         Product actualProduct = jdbcTemplate.queryForObject("SELECT * FROM product WHERE id = ?",
                 (rs, rowNum) -> new Product(
