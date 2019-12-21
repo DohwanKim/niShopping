@@ -11,6 +11,7 @@ export interface userType {
   phoneNumberVerified?: number;
   email: string;
   emailVerify: number;
+  isFirstLogin: number;
   registerDate: string;
   lastLoggedIn: string;
 }
