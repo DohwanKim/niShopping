@@ -1,10 +1,26 @@
 package com.nextivis.nishopping.app.controller;
 
-import org.springframework.stereotype.*;
+import com.nextivis.nishopping.domain.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
-    public void searchUserInfo(){
 
+    private final UserService userService;
+
+    @PostMapping("/create")
+    public int createUser() {
+        return 1;
+    }
+
+    @GetMapping("/check")
+    public Boolean existCheck() {
+        return userService.existingUser("asf");
     }
 }

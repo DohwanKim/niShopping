@@ -12,15 +12,17 @@ import java.time.*;
 public class Product {
     private Long id;
     @NotNull
-    private long pid;
+    private String pid;
     @NotNull
     private String name;
     @NotNull
     private int price;
-    private int salesRage;
+    private int salesRate;
     private String promotion;
     @NotNull
     private String seller;
+    @NotNull
+    private String genre;
     private String image;
     @NotNull
     private int stock;
@@ -35,5 +37,5 @@ public class Product {
     private String publisher;
     private String summary;
     private String size;
-    private Float weight;
+    private int weight;
 }

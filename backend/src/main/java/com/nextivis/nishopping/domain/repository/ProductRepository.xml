@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nextivis.nishopping.domain.repository.ProductRepository">
+    <resultMap id="entity" type="com.nextivis.nishopping.domain.entity.Product" autoMapping="true">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <sql id="selectColumns">
+        id,
+        pid,
+        name,
+        price,
+        sales_rate,
+        genre,
+        promotion,
+        seller,
+        image,
+        stock,
+        score,
+        release_dat,
+        translator,
+        author,
+        publisher,
+        summary,
+        size,
+        weight
+    </sql>
+    <sql id="updateColumns">
+        `pid` = #{pid},
+        `name` = #{name},
+        `price` = #{price},
+        `sales_rate` = #{salesRate},
+        `promotion` = #{promotion},
+        `seller` = #{seller},
+        `genre` = #{genre},
+        `image` = #{image},
+        `stock` = #{stock},
+        `score` = #{score},
+        `release_date` = #{releaseDate},
+        `translator` = #{translator},
+        `author` = #{author},
+        `publisher` = #{publisher},
+        `summary` = #{summary},
+        `size` = #{size},
+        `weight` = #{weight}
+    </sql>
+    <insert id="create" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO `product`
+        SET <include refid="updateColumns" />
+    </insert>
+    <select id="findAll" resultMap="entity">
+        SELECT *
+        FROM `product`
+    </select>
+    <select id="findByPid" resultMap="entity">
+        SELECT *
+        FROM `product`
+        WHERE pid = #{pid}
+    </select>
+    <select id="findByGenre" resultMap="entity">
+        SELECT *
+        FROM `product`
+        WHERE genre = #{genre}
+    </select>
+    <update id="updateProduct">
+        UPDATE `product`
+        SET <include refid="updateColumns" />
+        WHERE pid = #{pid}
+    </update>
+</mapper>
