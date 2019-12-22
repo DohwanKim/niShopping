@@ -11,7 +11,6 @@ import java.time.*;
 @Builder
 public class Product {
     private Long id;
-    @NotNull
     private String pid;
     @NotNull
     private String name;

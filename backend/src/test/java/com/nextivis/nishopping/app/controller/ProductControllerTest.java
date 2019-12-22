@@ -113,7 +113,6 @@ public class ProductControllerTest {
     Product createProductEntity() {
         Product product = Product.builder()
                 .id(123L)
-                .pid("pidTest")
                 .name("nameTest")
                 .price(123)
                 .salesRate(100)

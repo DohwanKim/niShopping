@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -18,8 +19,10 @@ public class ProductService {
 
     public int createProduct(Product product) {
         String newPid = randomHelper.getUUID();
+        LocalDateTime releaseDate = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         // TODO : duplicatePID check
         product.setPid(newPid);
+        product.setReleaseDate(releaseDate);
         return productRepository.create(product);
     }
 
