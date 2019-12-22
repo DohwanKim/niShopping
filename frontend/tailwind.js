@@ -1,6 +1,7 @@
 module.exports = {
   theme: {
     inset: {
+      '1/2': '50%',
       '1/12': '8.333333%',
       '-9999px': '-9999px',
       '-46px': '-46px',
@@ -12,7 +13,6 @@ module.exports = {
       '9px': '9px',
       '10px': '10px',
       '12px': '12px',
-      'm2px': '-2px',
     },
     zIndex: {
       '-1': '-1',
@@ -30,10 +30,11 @@ module.exports = {
       100: 100,
       9997: 9997,
       9999: 9999,
-      'auto': 'auto',
+      auto: 'auto',
     },
     lineHeight: {
       none: 1,
+      moreTight: 1.1,
       tight: 1.25,
       snug: 1.375,
       normal: 1.5,
@@ -43,10 +44,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        'appleBlue': '#0070c9',
-        'appleBlack': '#333333',
-        'appleFooter': '#f5f5f7',
-        'appleGray': {
+        appleBlue: '#0070c9',
+        appleBlack: '#333333',
+        appleFooter: '#f5f5f7',
+        appleGray: {
           100: '#515154',
           200: '#86868b',
           300: '#999999',
@@ -54,19 +55,24 @@ module.exports = {
           500: '#888888',
           600: '#666666',
         },
-        'orange': '#e85d00',
+        orange: '#e85d00',
       },
       spacing: {
+        '2px': '2px',
+        '3px': '3px',
         '4px': '4px',
         '6px': '6px',
         '8px': '8px',
         '10px': '10px',
         '12px': '12px',
         '15px': '15px',
+        '20px': '20px',
         '30px': '30px',
         '35px': '35px',
+        '36px': '36px',
         '54px': '54px',
         '58px': '58px',
+        '60px': '60px',
         '98px': '98px',
         sm: '8px',
         md: '16px',
@@ -89,14 +95,15 @@ module.exports = {
         '1/2': '50%',
         '3/4': '75%',
         '3/5': '60%',
-        'lg': '1023px',
+        lg: '1023px',
+        '480px': '480px',
         '980px': '980px',
       },
       minWidth: {
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
         '30px': '30px',
       },
       maxHeight: {
@@ -106,7 +113,9 @@ module.exports = {
         183: '45.75rem',
       },
       fontSize: {
+        '1em': '1em',
         '3.5xl': '2rem',
+        '4.5xl': '2.5rem',
       },
     },
   },

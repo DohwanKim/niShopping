@@ -1,28 +1,44 @@
-import axios from 'axios'
-import AuthService from './AuthService'
+import axios from 'axios';
+import AuthService from './AuthService';
 
 const baseUrl = 'http://localhost:9000';
-var user = new AuthService();
+const user = new AuthService();
 
 const defineHeaderAxios = async () => {
   await user.getUser().then(
-    userInfo => {
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + userInfo.id_token;
-    }, err => {
-      console.log(err)
-    })
+    (userInfo) => {
+      axios.defaults.headers.common.Authorization = `Bearer ${userInfo.id_token}`;
+    }, (err) => {
+      console.log(err);
+    },
+  );
 };
 
-const defaultGet = async (api) => {
+const defaultGet = async (api, data) => {
   await defineHeaderAxios();
   return axios
-    .get(baseUrl + api)
-    .then(response => response.data)
-    .catch(err => {
-      console.log(err);
+    .get(baseUrl + api, {
+      params: {
+        ...data,
+      },
     })
+    .then(response => response.data)
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const defaultPost = async (api, data) => {
+  await defineHeaderAxios();
+  return axios
+    .post(baseUrl + api, data)
+    .then(response => response.data)
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 export {
-  defaultGet
-}
+  defaultGet,
+  defaultPost,
+};

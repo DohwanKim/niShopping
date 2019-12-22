@@ -3,7 +3,9 @@ import Vuex from 'vuex';
 import { userType } from '../types/user';
 import { stateType } from '../types/state';
 import { cartType, cartTypeArray } from '../types/cart';
+import { productType } from '../types/product';
 import { likeType } from '../types/like';
+import * as cartService from '../service/cartService';
 
 Vue.use(Vuex);
 
@@ -21,6 +23,7 @@ const state: stateType = {
     phoneNumberVerified: 1,
     email: 'email',
     emailVerify: 1,
+    isFirstLogin: 0,
     registerDate: 'registerdate',
     lastLoggedIn: 'lastloggedin',
   },
@@ -88,10 +91,10 @@ export default new Vuex.Store({
       /* 호출전 유저 로그인 여부 확인 -> 로그인 중 -> DB에 상품 정보 INSERT -> 성공 */
       commit('fetchCartInfo', cartInfo);
     },
-    addCartInfo({ commit }, cartInfo: cartType) {
+    addCartInfo({ commit }, productInfo: productType) {
       /* 선행 로직  */
       /* 호출전 유저 로그인 여부 확인 -> 로그인 중 -> DB에 상품 정보 INSERT -> 성공 */
-      commit('addItemToCartInfo', cartInfo);
+      commit('addItemToCartInfo', productInfo);
     },
     clearProductInfoInCart({ commit }) {
       commit('clearCartInfo');

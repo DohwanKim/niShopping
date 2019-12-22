@@ -19,7 +19,6 @@ import {
   Component,
 } from 'vue-property-decorator';
 import AuthService from '../service/AuthService';
-import apiService from '../service/apiService';
 
 @Component
 export default class DropDown extends Vue {
@@ -36,11 +35,6 @@ export default class DropDown extends Vue {
 
   goPage(res:string): void {
     this.$router.push(res);
-  }
-
-  async apiTest() {
-    var a = await new apiService().defaultGet('/api/user/test');
-    console.log(a);
   }
 }
 

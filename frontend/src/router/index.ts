@@ -7,9 +7,13 @@ import UserCartView from '../views/user/CartView.vue';
 import UserLikeView from '../views/user/LikeView.vue';
 import UserOrderView from '../views/user/OrderView.vue';
 import UserOrderDetailView from '../views/user/OrderDetailView.vue';
+import FinalOrderView from '../views/user/FinalOrderView.vue';
 import AuthService from '../service/AuthService';
+import ProductView from '../views/product/ProductView.vue';
 import DetailProductView from '../views/product/DetailProductView.vue';
 import QnaBoardView from '../views/board/QnaBoardView.vue';
+import WriteBoardView from '../views/board/WriteBoardView.vue';
+import EditProductView from '../views/product/EditProductView.vue';
 
 Vue.use(VueRouter);
 
@@ -71,6 +75,22 @@ const routes = [
     },
   },
   {
+    path: '/myinfo/finalorder',
+    name: 'FinalOrdrerView',
+    component: FinalOrderView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/product',
+    name: 'ProductView',
+    component: ProductView,
+    meta: {
+      requireAuth: false,
+    },
+  },
+  {
     path: '/product/:productId',
     name: 'DetailProductView',
     component: DetailProductView,
@@ -83,6 +103,22 @@ const routes = [
     path: '/qnaboard',
     name: 'QnaBoardView',
     component: QnaBoardView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/qnaboard/write',
+    name: 'WriteBoardView',
+    component: WriteBoardView,
+    meta: {
+      requireAuth: true,
+    },
+  },
+  {
+    path: '/editproduct',
+    name: 'EditProductView',
+    component: EditProductView,
     meta: {
       requireAuth: true,
     },

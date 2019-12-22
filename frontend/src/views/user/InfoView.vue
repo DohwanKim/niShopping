@@ -5,13 +5,13 @@
     </div>
     <div class="main">
       <transition name="fade">
-        <div v-if="alertSuccessStatus" class="v-leave-active main__alert opacity-75 absolute bg-blue-100 border-t border-b border-blue-500 text-blue-800 px-4 py-3" role="alert">
+        <div v-if="statusData.alertSuccessStatus" class="v-leave-active main__alert opacity-75 absolute bg-blue-100 border-t border-b border-blue-500 text-blue-800 px-4 py-3" role="alert">
           <p class="font-bold">수정 완료</p>
           <p class="text-sm">입력하신 정보로 수정되었습니다.</p>
         </div>
       </transition>
       <transition name="fade">
-        <div v-if="alertCancelStatus" role="alert" class="v-leave-active main__alert opacity-75 absolute">
+        <div v-if="statusData.alertCancelStatus" role="alert" class="v-leave-active main__alert opacity-75 absolute">
           <div class="bg-red-700 text-white font-bold rounded-t px-4 py-2">
             수정 취소
           </div>
@@ -59,26 +59,26 @@
               이메일(아이디)
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              {{ userInfo.userEmail }}
+              {{ userInfo.email }}
             </div>
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
               이름
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              {{ userInfo.userName }}
+              {{ userInfo.name }}
             </div>
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
               닉네임
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
-              {{ userInfo.userNick }}
+              {{ userInfo.nickName }}
             </div>
             <div class="main__contents--box-t bg-gray-300 rounded-t-lg">
               주소
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
               <div v-if="modifiedOff">
-                {{ userInfo.userAddress }}
+                {{ userInfo.address }}
               </div>
               <div v-if="modifiedOn">
                 <label>
@@ -91,7 +91,7 @@
             </div>
             <div class="main__contents--box-b rounded-b-lg shadow-md">
               <div v-if="modifiedOff">
-                {{ userInfo.userPhoneNumber }}
+                {{ userInfo.phoneNumber }}
               </div>
               <div v-if="modifiedOn">
                 <label>
@@ -101,7 +101,6 @@
             </div>
           </div>
         </section>
-
       </div>
     </div>
     <div class="footer">
@@ -117,7 +116,8 @@ import {
 } from 'vue-property-decorator';
 import NavBar from '../../components/NavBar.vue';
 import Footer from '../../components/Footer.vue';
-import AuthService from '../../service/AuthService';
+import userService from '../../service/userService';
+import { userType } from '../../types/user';
 
 @Component({
   components: {
@@ -126,19 +126,28 @@ import AuthService from '../../service/AuthService';
   },
 })
 export default class InfoView extends Vue {
-  modified: boolean = false;
+  private statusData = {
+    modified: false,
+    alertSuccessStatus: false,
+    alertCancelStatus: false,
+  };
 
-  alertSuccessStatus: boolean = false;
-
-  alertCancelStatus: boolean = false;
-
-  userInfo = {
-    userEmail: '',
-    userName: '',
-    userNick: '',
+  private userInfo: userType = {
+    id: 0,
+    userId: '',
+    name: '',
+    nickName: '',
     userImage: '',
-    userAddress: '',
-    userPhoneNumber: '',
+    gender: 0,
+    address: '',
+    birthDate: '',
+    phoneNumber: '',
+    phoneNumberVerified: 0,
+    email: '',
+    emailVerify: 0,
+    isFirstLogin: 0,
+    registerDate: '',
+    lastLoggedIn: '',
   };
 
   changeInfo = {
@@ -147,44 +156,36 @@ export default class InfoView extends Vue {
   };
 
   created() {
-    new AuthService().getUser().then((res) => {
-      if (res) {
-        this.userInfo.userEmail = res.profile.email;
-        this.userInfo.userName = res.profile.name;
-        this.userInfo.userNick = res.profile.nickname;
-        this.userInfo.userImage = res.profile.picture;
-        this.userInfo.userAddress = res.profile.address;
-        this.userInfo.userPhoneNumber = res.profile.phoneNumber;
-      }
-    });
+    this.userInfo = userService.getUserInfo();
   }
 
   get modifiedOff() {
-    return !this.modified;
+    return !this.statusData.modified;
   }
 
   get modifiedOn() {
-    return this.modified;
+    return this.statusData.modified;
   }
 
-  changeModified() :void{
-    if (!this.modified) {
-      this.modified = true;
+  async changeModified() {
+    if (!this.statusData.modified) {
+      this.statusData.modified = true;
     } else if (this.changeInfo.inputAddress === '' || this.changeInfo.inputPhoneNumber === '') {
       alert('입력되지 않은 정보가 있습니다.');
     } else {
-      this.userInfo.userAddress = this.changeInfo.inputAddress;
-      this.userInfo.userPhoneNumber = this.changeInfo.inputPhoneNumber;
+      this.userInfo.address = this.changeInfo.inputAddress;
+      this.userInfo.phoneNumber = this.changeInfo.inputPhoneNumber;
+      await userService.updateUserInfo(this.userInfo);
       this.clearModifiedData();
       this.toastSuccess();
-      this.modified = false;
+      this.statusData.modified = false;
     }
   }
 
   cancelModified() :void{
     this.clearModifiedData();
     this.toastCancel();
-    this.modified = false;
+    this.statusData.modified = false;
   }
 
   clearModifiedData() :void{
@@ -193,16 +194,16 @@ export default class InfoView extends Vue {
   }
 
   toastSuccess() :void{
-    this.alertSuccessStatus = true;
+    this.statusData.alertSuccessStatus = true;
     setTimeout(() => {
-      this.alertSuccessStatus = false;
+      this.statusData.alertSuccessStatus = false;
     }, 3000);
   }
 
   toastCancel() :void{
-    this.alertCancelStatus = true;
+    this.statusData.alertCancelStatus = true;
     setTimeout(() => {
-      this.alertCancelStatus = false;
+      this.statusData.alertCancelStatus = false;
     }, 3000);
   }
 }
