@@ -213,6 +213,31 @@ export default class DetailProductView extends Vue {
 
   private productInfo: productType | null = null;
 
+  created() {
+    // productService.createProduct({
+    //   name: 'Name',
+    //   price: 39000,
+    //   salesRate: 15,
+    //   promotion: 'promotion',
+    //   seller: 'seller',
+    //   genre: 'genre',
+    //   image: 'assets/img/testbook.jpg',
+    //   stock: 213,
+    //   summary: 'summary',
+    //   score: 43,
+    //   release: 'release',
+    //   translator: 'translator',
+    //   author: 'author',
+    //   publisher: 'publisher',
+    //   size: 'size',
+    //   weight: 4,
+    // }).then((res) => {
+    //   console.log('res', res);
+    // }).catch((err) => {
+    //   console.log('err', err);
+    // });
+  }
+
   @Watch('productId', { immediate: true })
   async getProductInfo(newValue: string, oldValue: string) {
     // console.log('productId', this.productId);
@@ -226,21 +251,20 @@ export default class DetailProductView extends Vue {
       pid: 'pid',
       name: 'Name',
       price: 39000,
-      salesRate: 9.9,
+      salesRate: 15,
       promotion: 'promotion',
       seller: 'seller',
       genre: 'genre',
       image: 'assets/img/testbook.jpg',
       stock: 213,
       summary: 'summary',
-      score: 4.5,
+      score: 43,
       release: 'release',
       translator: 'translator',
-      author: '작가',
-      publisher: '출판사',
-      size: '크기',
-      weight: '무게',
-      pages: 213,
+      author: 'author',
+      publisher: 'publisher',
+      size: 'size',
+      weight: 4,
     };
   }
 
