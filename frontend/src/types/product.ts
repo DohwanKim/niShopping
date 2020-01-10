@@ -16,6 +16,6 @@ export interface productType {
   publisher: string;
   summary?: string;
   size?: string;
-  weight?: string;
+  weight?: number;
   pages?: number;
 }

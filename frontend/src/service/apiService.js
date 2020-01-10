@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 import AuthService from './AuthService';
 
 const baseUrl = 'http://localhost:9000';
@@ -31,7 +32,11 @@ const defaultGet = async (api, data) => {
 const defaultPost = async (api, data) => {
   await defineHeaderAxios();
   return axios
-    .post(baseUrl + api, data)
+    .post(baseUrl + api, qs.stringify(data), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
     .then(response => response.data)
     .catch((err) => {
       console.log(err);
