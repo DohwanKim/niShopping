@@ -31,7 +31,7 @@ jobs: # a collection of steps
 
       - run:
           name: Mvn Test
-          commandcd: |
+          command: |
             ../backend && mvn clean test # run the actual tests
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
