@@ -34,7 +34,6 @@ jobs: # a collection of steps
             do
               sleep 1
             done
-            echo Failed waiting for Mysql && exit 1
 
       - run:
           name: Mvn Test
