@@ -28,6 +28,10 @@ jobs: # a collection of steps
             docker-compose up -d
 
       - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:3310 -timeout 1m
+
+      - run:
           name: Mvn Test
           command: |
             cd ./backend && mvn clean test # run the actual tests
