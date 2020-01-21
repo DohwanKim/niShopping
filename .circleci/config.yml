@@ -18,8 +18,7 @@ jobs:
       # run tests!
       - run:
         shell: /bin/sh
-        command: |
-          cd backend
+        command: cd backend
 
       - run: mvn clean test
 
