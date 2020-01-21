@@ -26,15 +26,14 @@ jobs: # a collection of steps
             set -x
             cd ./docker
             docker-compose up -d
-
-      - run:
-          name: Wait for db
-          command: dockerize -wait http://localhost:3310 -timeout 3m
+            docker run --network container:contacts \
+                                      appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3310
 
       - run:
           name: Mvn Test
           command: |
-            cd ./backend && mvn clean test # run the actual tests
+            cd ./backend
+            mvn clean test # run the actual tests
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
       # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
