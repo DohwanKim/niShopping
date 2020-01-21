@@ -5,12 +5,38 @@ jobs: # a collection of steps
     working_directory: ~/circleci-demo-java-spring # directory where steps will run
 
     docker: # run the steps with Docker
+      - image: circleci/cci-demo-docker-primary:0.0.2
       - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
-      - image: kkddgg1001/mysql
 
     steps: # a collection of executable commands
-
       - checkout # check out source code to working directory
+
+      - setup_remote_docker
+
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+
+      - run:
+          name: Start container and verify it is working
+          command: |
+            set -x
+            docker-compose up -d
+
+            docker run --network container:contacts \
+              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3310
 
       - run:
           name: Waiting for Postgres to be ready
