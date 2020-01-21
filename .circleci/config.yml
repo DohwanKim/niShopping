@@ -26,8 +26,17 @@ jobs: # a collection of steps
             set -x
             cd ./docker
             docker-compose up -d
-            docker run --network container:contacts \
-                                      appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3310
+
+      - run:
+          name: Waiting for Postgres to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 3310 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgress && exit 1
 
       - run:
           name: Mvn Test
