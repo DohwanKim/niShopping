@@ -18,7 +18,7 @@ jobs: # a collection of steps
           chmod +x ~/docker-compose
           sudo mv ~/docker-compose /usr/local/bin/docker-compose
       - run: cd ./docker && docker-compose up
-          name: docker-compose up
+        name: docker-compose up
       - run: cd ../backend mvn package # run the actual tests
 
       - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
