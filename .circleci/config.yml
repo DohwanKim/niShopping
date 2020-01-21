@@ -32,7 +32,7 @@ jobs: # a collection of steps
           command: |
             for i in `seq 1 100`;
             do
-              nc -z localhost 3310 && echo Success && exit 0
+              nc -z localhost 3306 && echo Success && exit 0
               echo -n .
               sleep 1
             done
