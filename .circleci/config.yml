@@ -30,10 +30,8 @@ jobs: # a collection of steps
       - run:
           name: Waiting for Mysql to be ready
           command: |
-            for i in `seq 1 100`;
+            for i in `seq 1 30`;
             do
-              nc -z localhost 3306 && echo Success && exit 0
-              echo -n .
               sleep 1
             done
             echo Failed waiting for Mysql && exit 1
