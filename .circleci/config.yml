@@ -28,15 +28,15 @@ jobs: # a collection of steps
             docker-compose up -d
 
       - run:
-          name: Waiting for Postgres to be ready
+          name: Waiting for Mysql to be ready
           command: |
-            for i in `seq 1 10`;
+            for i in `seq 1 100`;
             do
               nc -z localhost 3310 && echo Success && exit 0
               echo -n .
               sleep 1
             done
-            echo Failed waiting for Postgress && exit 1
+            echo Failed waiting for Mysql && exit 1
 
       - run:
           name: Mvn Test
