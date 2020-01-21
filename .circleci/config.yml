@@ -11,32 +11,44 @@ jobs: # a collection of steps
 
       - checkout # check out source code to working directory
 
-      - setup_remote_docker:
+      - setup_remote_docker
 
+        # This should go into custom primary image, here's only for the sake of explanation
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      # This should go into custom primary image, here's only for the sake of explanation
       - run:
           name: Install Docker Compose
           command: |
-            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-
-      - run:
-          name: Start container and verify it is working
-          command: |
             set -x
-            cd ./docker
-            docker-compose up -d
+            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+      - run:
+          name: Build service
+          command: make
 
       - run:
-          name: Waiting for Mysql to be ready
+          name: Start container and verify it's working
           command: |
-            for i in `seq 1 30`;
-            do
-              nc -z localhost 3310 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for Mysql && exit 1
+            cd ./docker
+            set -x
+            docker-compose up -d
+            docker run --network container:contacts \
+              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
+
+      - deploy:
+          name: Build and push Docker image
+          command: |
+            TAG="0.1.${CIRCLE_BUILD_NUM}"
+            docker build -t circleci/cci-demo-docker:$TAG .
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker push circleci/cci-demo-docker:$TAG
 
       - run:
           name: Mvn Test
