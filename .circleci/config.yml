@@ -16,4 +16,10 @@ jobs:
     steps:
       - checkout
       # run tests!
+      - run:
+        shell: /bin/sh
+        command: |
+          cd backend
+
       - run: mvn clean test
+
