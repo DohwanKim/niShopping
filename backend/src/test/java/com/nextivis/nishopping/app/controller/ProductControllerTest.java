@@ -38,15 +38,6 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void create() throws Exception {
-        when(productService.createProduct(createProductEntity())).thenReturn(1);
-        mockMvc.perform(post("/product/create")
-                .params(createProductParams()))
-                .andExpect(status().isOk());
-        verify(productService).createProduct(createProductEntity());
-    }
-
-    @Test
     public void update() throws Exception {
         mockMvc.perform(post("/product/update")
                 .params(createProductParams()))
