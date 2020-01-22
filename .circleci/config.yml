@@ -26,6 +26,6 @@ jobs: # a collection of steps
             cd ./docker
             docker-compose build
             docker-compose up -d
-            sleep 100
+            sleep 300
             cd ../backend
             mvn clean test
