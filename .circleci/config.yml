@@ -24,6 +24,7 @@ jobs: # a collection of steps
           name: Start container and verify it is working
           command: |
             set -x
+            cd ./docker
             docker-compose up -d
 
             docker run --network container:contacts \
