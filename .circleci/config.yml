@@ -24,8 +24,8 @@ jobs: # a collection of steps
           command: |
             set -x
             cd ./docker
+            docker-compose build
             docker-compose up -d
-            docker-compose run contacts
             sleep 100
             cd ../backend
             mvn clean test
