@@ -30,6 +30,12 @@ jobs: # a collection of steps
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3310
 
   test:
+
+    working_directory: ~/circleci-demo-java-spring # directory where steps will run
+
+    docker: # run the steps with Docker
+      - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+
     steps:
       - run:
           name: Mvn Test
