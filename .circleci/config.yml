@@ -5,7 +5,6 @@ jobs: # a collection of steps
     working_directory: ~/circleci-demo-java-spring # directory where steps will run
 
     docker: # run the steps with Docker
-      - image: circleci/cci-demo-docker-primary:0.0.2
       - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
 
     steps: # a collection of executable commands
