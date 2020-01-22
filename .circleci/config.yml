@@ -19,14 +19,6 @@ jobs: # a collection of steps
 
       - setup_remote_docker
 
-  test:
-
-    working_directory: ~/circleci-demo-java-spring # directory where steps will run
-
-    docker: # run the steps with Docker
-      - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
-
-    steps:
       - run:
           name: Start container and verify it is working
           command: |
@@ -35,7 +27,7 @@ jobs: # a collection of steps
             docker-compose up -d
 
             docker run --network container:contacts \
-              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3310
+            appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:3310
       - run:
           name: Mvn Test
           command: |
