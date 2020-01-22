@@ -17,15 +17,16 @@ jobs: # a collection of steps
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
-      - setup_remote_docker
-
       - run:
           name: Start container and verify it is working
           command: |
             set -x
             cd ./docker
-            docker-compose build
-            docker-compose up -d
-            sleep 300
+            docker-compose up --build -d
+            dockerize -wait tcp://localhost:3310 -timeout 2m
+
+      - run:
+          name: mvn test
+          command: |
             cd ../backend
             mvn clean test
