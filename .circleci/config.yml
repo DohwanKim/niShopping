@@ -21,16 +21,6 @@ jobs:
             docker-compose up -d
             sleep 30
 
-      - restore_cache:
-          key: circleci-demo-noShopping-{{ checksum "pom.xml" }}
-
-      - run: mvn dependency:go-offline
-
-      - save_cache: # saves the project dependencies
-          paths:
-            - ~/.m2
-          key: circleci-demo-noShopping-{{ checksum "pom.xml" }}
-
       - run:
           name: test
           command: |
