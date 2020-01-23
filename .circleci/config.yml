@@ -1,28 +1,45 @@
-version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-
-    working_directory: ~/circleci-demo-java-spring # directory where steps will run
-
+version: 2
+jobs:
+  build:
+    working_directory: ~/projects/nishopping
     docker: # run the steps with Docker
-      - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
-
-    steps: # a collection of executable commands
-      - checkout # check out source code to working directory
-
+      - image: circleci/ruby:2.4.2-jessie-node
+    steps:
+      - checkout
+      - setup_remote_docker
       - run:
           name: Install Docker Compose
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:
+          name: docker run (mysql)
+          command: |
             set -x
             cd ./docker
-            docker-compose up --build -d
-            dockerize -wait tcp://localhost:3310 -timeout 2m
+            docker-compose up -d
+            docker run --network container:contacts \
+                          appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 
+  mvn-test:
+    working_director: ~/projects/nishopping
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+    - steps:
+      - checkout
+      - setup_remote_docker
       - run:
-          name: mvn test
+          name: test
           command: |
-            cd ../backend
-            mvn clean test
+            cd ./backend
+            mvn test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - mvn-test:
+          requires:
+            - build
