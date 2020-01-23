@@ -33,7 +33,6 @@ jobs:
           name: test
           command: |
             cd ./backend
-            docker ps
             mvn package
 
 workflows:
