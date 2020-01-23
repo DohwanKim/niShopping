@@ -9,8 +9,8 @@ services:
       MYSQL_ROOT_PASSWORD: 'root_password'
       MYSQL_USER: 'ivis'
       MYSQL_PASSWORD: 'ivis_password'
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+#    volumes:
+#      - ./mysql/data:/var/lib/mysql
+#      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
       - '3310:3306'
