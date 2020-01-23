@@ -21,8 +21,14 @@ jobs:
             docker-compose up -d
             sleep 30
             docker ps
-            nc -z localhost 3310 && true
-            nc -z localhost 3306 && echo umm...
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 3310 && echo s:3310 && exit 0
+              nc -z localhost 3306 && echo s:3306 && exit 0
+              echo -n .
+              sleep 1
+            done
+
       - run:
           name: test
           command: |
