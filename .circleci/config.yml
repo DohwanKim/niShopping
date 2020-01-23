@@ -20,6 +20,7 @@ jobs:
             cd ./docker
             docker-compose up -d
             sleep 30
+            docker ps
 
       - run:
           name: test
