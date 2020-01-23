@@ -19,7 +19,8 @@ jobs:
             set -x
             cd ./docker
             docker-compose up -d
-            docker run --network container:contacts
+            sleep 30
+#            docker run --network container:contacts
 
   mvn-test:
     working_directory: ~/projects/nishopping
