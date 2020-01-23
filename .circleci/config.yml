@@ -1,12 +1,13 @@
 version: 2
 jobs:
-  build:
+  build_and_test:
     working_directory: ~/projects/nishopping
     docker:
       - image: circleci/ruby:2.4.2-jessie-node
     steps:
       - checkout
       - setup_remote_docker
+          docker_layer_caching: true
       - run:
           name: Install Docker Compose
           command: |
@@ -20,25 +21,25 @@ jobs:
             cd ./docker
             docker-compose up -d
             sleep 30
-#            docker run --network container:contacts
 
-  mvn-test:
-    working_directory: ~/projects/nishopping
-    docker:
-      - image: circleci/openjdk:8-jdk-stretch
-    steps:
-      - checkout
+      - restore_cache:
+          key: circleci-demo-noShopping-{{ checksum "pom.xml" }}
+
+      - run: mvn dependency:go-offline
+
+      - save_cache: # saves the project dependencies
+          paths:
+            - ~/.m2
+          key: circleci-demo-noShopping-{{ checksum "pom.xml" }}
+
       - run:
           name: test
           command: |
             cd ./backend
-            mvn test
+            mvn package
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - mvn-test:
-          requires:
-            - build
+      - build_and_test
