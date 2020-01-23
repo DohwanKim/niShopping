@@ -21,7 +21,8 @@ jobs:
             docker-compose up -d
             sleep 30
             docker ps
-            nc -z localhost 3310 && echo mysql work
+            nc -z localhost 3310 | true
+            nc -z localhost 3306 | echo umm...
       - run:
           name: test
           command: |
