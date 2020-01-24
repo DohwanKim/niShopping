@@ -1,12 +1,11 @@
 version: 2
 jobs:
   build_and_test:
-    working_directory: ~/projects/nishopping
     docker:
       - image: circleci/openjdk:8-jdk-stretch
     environment:
-      - environment:
-          SPRING_DATASOURCE_URL: 'jdbc:mysql://contacts:3306/iv_shopping?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC'
+      SPRING_DATASOURCE_URL: 'jdbc:mysql://contacts:3306/iv_shopping?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC'
+    working_directory: ~/projects/nishopping
     steps:
       - checkout
       - setup_remote_docker
