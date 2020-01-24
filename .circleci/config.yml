@@ -4,21 +4,15 @@ jobs:
     working_directory: ~/projects/nishopping
     docker:
       - image: circleci/openjdk:8-jdk-stretch
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_DATABASE: 'iv_shopping'
+          MYSQL_ROOT_PASSWORD: 'root_password'
+          MYSQL_USER: 'ivis'
+          MYSQL_PASSWORD: 'ivis_password'
+          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/iv_shopping?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     steps:
       - checkout
-      - setup_remote_docker
-      - run:
-          name: Install Docker Compose
-          command: |
-            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          name: docker run (mysql)
-          command: |
-            set -x
-            cd ./docker
-            docker-compose up -d
 
       - run:
           name: test
