@@ -26,6 +26,7 @@ jobs:
           name: test
           command: |
             cd ./backend
+            sleep 30
             mvn package
 
 workflows:
