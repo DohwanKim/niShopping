@@ -4,6 +4,9 @@ jobs:
     working_directory: ~/projects/nishopping
     docker:
       - image: circleci/openjdk:8-jdk-stretch
+    environment:
+      - environment:
+          SPRING_DATASOURCE_URL: jdbc:mysql://contacts:3306/iv_shopping?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     steps:
       - checkout
       - setup_remote_docker
